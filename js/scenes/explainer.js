@@ -26,7 +26,7 @@ export default function create(root, api) {
     frame = true;
     const src = await pickSource();
     const isLocal = src !== REMOTE;
-    credit.textContent = `Transformer Explainer · Polo Club of Data Science, Georgia Tech · MIT licence · GPT-2 small ${isLocal ? 'running locally (int8 copy)' : 'running in this browser'}`;
+    credit.textContent = `Transformer Explainer · Polo Club, Georgia Tech · MIT licence · ${isLocal ? 'local int8 copy' : 'live from poloclub.github.io'}`;
     status.textContent = isLocal ? 'loading the model (local)…' : 'loading the live demo…';
     frame = h('iframe', { src, title: 'Transformer Explainer', style: 'position:absolute;inset:0;width:100%;height:100%;border:0;opacity:0;background:#fff' }, box);
     frame.addEventListener('load', () => {

@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Making AI work for you</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 32 32%27%3E%3Ccircle cx=%2716%27 cy=%2716%27 r=%2712%27 fill=%27%235fd4e8%27/%3E%3C/svg%3E">
+<link rel="stylesheet" href="css/deck.css">
+<link rel="stylesheet" href="css/scenes.css">
+</head>
+<body>
+<div id="viewport">
+  <div id="stage">
+    <div id="bg"></div>
+    <div id="scenes"></div>
+    <div id="caption">
+      <div class="kicker"></div>
+      <h1 class="headline"></h1>
+      <p class="sub"></p>
+    </div>
+    <div id="chrome">
+      <div id="part-label"></div>
+      <div id="counter"></div>
+      <div id="progress"><i></i></div>
+    </div>
+  </div>
+</div>
+<button id="nav-prev" class="navbtn" aria-label="Previous">‹</button>
+<button id="nav-next" class="navbtn" aria-label="Next">›</button>
+<aside id="notes" hidden></aside>
+<div id="overview" hidden></div>
+<div id="help" hidden></div>
+
+<script src="vendor/gsap/gsap.min.js"></script>
+<script src="vendor/gsap/MotionPathPlugin.min.js"></script>
+<script src="vendor/gsap/Flip.min.js"></script>
+<script src="vendor/gsap/CustomEase.min.js"></script>
+<script type="module" src="js/engine.js"></script>
+</body>
+</html>

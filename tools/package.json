@@ -1,0 +1,7 @@
+{
+  "name": "ai-talk-tools",
+  "private": true,
+  "type": "module",
+  "description": "Dev-only helpers for the deck (verification screenshots, data builders). Not needed to present.",
+  "devDependencies": { "puppeteer-core": "^24.0.0" }
+}

@@ -1,0 +1,143 @@
+diff --git a/package.json b/package.json
+index d680935..0c023da 100644
+--- a/package.json
++++ b/package.json
+@@ -47,7 +47,7 @@
+ 		"tailwindcss": "^3.4.1",
+ 		"tslib": "^2.4.1",
+ 		"typescript": "^5.0.0",
+-		"vite": "^5.4.21"
++		"vite": "^6.4.3"
+ 	},
+ 	"type": "module",
+ 	"dependencies": {
+diff --git a/src/app.html b/src/app.html
+index 53fee17..c928ecc 100644
+--- a/src/app.html
++++ b/src/app.html
+@@ -3,9 +3,7 @@
+ 	<head>
+ 		<meta charset="utf-8" />
+ 		<link rel="icon" href="%sveltekit.assets%/favicon.png" />
+-		<link rel="preconnect" href="https://fonts.googleapis.com" />
+-		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+-		<link href="https://fonts.googleapis.com/css2?family=Jersey+10&display=swap" rel="stylesheet" />
++		<!-- offline build: Google Fonts link removed -->
+ 		<meta name="viewport" content="width=device-width, initial-scale=1" />
+ 		<title>Transformer Explainer: LLM Transformer Model Visually Explained</title>
+ 
+diff --git a/src/components/article/Article.svelte b/src/components/article/Article.svelte
+index 607b84c..02e3079 100644
+--- a/src/components/article/Article.svelte
++++ b/src/components/article/Article.svelte
+@@ -535,15 +535,7 @@
+ 
+ 	<div class="article-section" data-click="article-video">
+ 		<h2>Video Tutorial</h2>
+-		<div class="video-container">
+-			<iframe
+-				src="https://www.youtube.com/embed/ECR4oAwocjs"
+-				frameborder="0"
+-				allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+-				allowfullscreen
+-			>
+-			</iframe>
+-		</div>
++		<p><a href="https://www.youtube.com/watch?v=ECR4oAwocjs" target="_blank">Watch the video tutorial on YouTube</a> (offline build: embed removed).</p>
+ 	</div>
+ 
+ 	<div class="article-section" data-click="article-implementation">
+diff --git a/src/routes/+page.svelte b/src/routes/+page.svelte
+index 813fee4..5c07172 100644
+--- a/src/routes/+page.svelte
++++ b/src/routes/+page.svelte
+@@ -38,13 +38,17 @@
+ 	import { fetchAndMergeChunks } from '~/utils/fetchChunks';
+ 	import WeightPopovers from '~/components/WeightPopovers.svelte';
+ 	import { fade } from 'svelte/transition';
+-	import { AutoTokenizer } from '@xenova/transformers';
++	import { AutoTokenizer, env as hfEnv } from '@xenova/transformers';
++	hfEnv.allowRemoteModels = false;
++	hfEnv.allowLocalModels = true;
++	hfEnv.localModelPath = `${base}/models/`;
++	hfEnv.useBrowserCache = false;
+ 	import { ex0, ex1, ex2, ex3, ex4 } from '~/constants/examples';
+ 	import BlockTransition from '~/components/BlockTransition.svelte';
+ 	import QKV from '~/components/QKV.svelte';
+ 	import Textbook from '~/components/textbook/Textbook.svelte';
+ 
+-	ort.env.wasm.wasmPaths = 'https://cdn.jsdelivr.net/npm/onnxruntime-web@1.23.0/dist/';
++	ort.env.wasm.wasmPaths = `${base}/ort/`;
+ 	ort.env.logLevel = 'error';
+ 
+ 	let active = false;
+@@ -66,10 +70,10 @@
+ 
+ 	// Fetch model onnx
+ 	const fetchModel = async () => {
+-		const chunkNum = 63; //TODO: move to model meta
++		const chunkNum = 20; // int8 model, see tools/quantize-explainer.py
+ 		const chunkUrls = Array(chunkNum)
+ 			.fill(0)
+-			.map((d, i) => `${base}/model-v2/gpt2.onnx.part${i}`);
++			.map((d, i) => `${base}/model-int8/gpt2.onnx.part${i}`);
+ 
+ 		// Fetch from cache
+ 		const { hasCache, mergedArray } = await fetchAndMergeChunks(chunkUrls);
+diff --git a/src/utils/Katex.svelte b/src/utils/Katex.svelte
+index 3d140cb..c47102e 100644
+--- a/src/utils/Katex.svelte
++++ b/src/utils/Katex.svelte
+@@ -1,5 +1,6 @@
+ <script>
+ 	import katex from 'katex';
++	import { base } from '$app/paths';
+ 
+ 	export let math;
+ 	export let displayMode = false;
+@@ -15,12 +16,7 @@
+ </script>
+ 
+ <svelte:head>
+-	<link
+-		rel="stylesheet"
+-		href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css"
+-		integrity="sha384-AfEj0r4/OFrOo5t7NnNe46zW/tFgW6x/bCJG8FqQCEo3+Aro6EYUG4+cU+KJWu/X"
+-		crossorigin="anonymous"
+-	/>
++	<link rel="stylesheet" href="{base}/katex/katex.min.css" />
+ </svelte:head>
+ 
+ {@html katexString}
+diff --git a/svelte.config.js b/svelte.config.js
+index 5dd4952..5ffccfe 100644
+--- a/svelte.config.js
++++ b/svelte.config.js
+@@ -27,7 +27,7 @@ const config = {
+ 			'~': './src'
+ 		},
+ 		paths: {
+-			base: process.env.NODE_ENV === 'production' ? '/transformer-explainer' : ''
++			base: process.env.BASE_PATH ?? (process.env.NODE_ENV === 'production' ? '/transformer-explainer' : '')
+ 		}
+ 	}
+ };
+diff --git a/vite.config.ts b/vite.config.ts
+index 9455ad0..a69161f 100644
+--- a/vite.config.ts
++++ b/vite.config.ts
+@@ -1,12 +1,13 @@
+ import { sveltekit } from '@sveltejs/kit/vite';
+ import { defineConfig } from 'vite';
++import path from 'node:path';
+ 
+ export default defineConfig({
+ 	plugins: [sveltekit()],
+ 	css: {
+ 		preprocessorOptions: {
+ 			scss: {
+-				additionalData: `@import 'src/styles/variables.scss';`
++				additionalData: `@import '${path.resolve('src/styles/variables.scss')}';`
+ 			}
+ 		}
+ 	},

@@ -1,0 +1,1 @@
+{"model":"openai-community/gpt2","tensor":"wte.weight","vocab":50257,"fullDims":768,"dims":64,"dtype":"int8","scale":0.5,"note":"value = int8 / 127 * scale"}

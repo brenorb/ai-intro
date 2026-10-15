@@ -4,6 +4,3 @@ shots/
 .DS_Store
 # offline Transformer Explainer build incl. model weights: local only, see README
 explainer/
-# transformers.js: local only (a false-positive secret-scan hit blocks pushing it); the deck falls back to
-# its built-in GPT-2 tokenizer (js/tokenizer.js), which produces identical tokens
-vendor/transformers/

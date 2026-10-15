@@ -77,12 +77,12 @@ js/engine.js          navigation, steps, scaling, captions, notes, overview, pre
 js/slides.js          THE DECK: order, captions, notes
 js/lib.js             small helpers (svg/html builders, seeded random, loops)
 js/winbar.js          the context-window bar (reused by several slides)
-js/tokenizer.js       GPT-2 tokenizer + embedding lookup
+js/tokenizer.js       GPT-2 tokenizer (byte-level BPE from tokenizer.json) + embedding lookup
 js/scenes/*.js        one module per scene (a scene serves one or more slides)
 data/                 real GPT-2 sampling data + compact embedding table
 models/gpt2/          GPT-2 tokenizer files
 explainer/            offline Transformer Explainer build with an int8 GPT-2 (local only, not in git)
-vendor/               GSAP, transformers.js, fonts
+vendor/               GSAP, fonts
 tools/                builders and the verification script (not needed to present)
 ```
 
@@ -95,7 +95,6 @@ What is real and what is illustrative is labelled on the slides: the tokenizer, 
 | Asset | Source | How |
 |---|---|---|
 | `vendor/gsap/*` | GSAP 3.15 (free licence) | copied from the `gsap` npm package (`dist/`) |
-| `vendor/transformers/transformers.min.js` (local only) | `@huggingface/transformers` 4.3.0 (Apache-2.0) | copied from the npm package (`dist/`); only its tokenizer is used. Not in git: GitHub's secret scanner flags a run of model names in the minified file as a Mistral key. Without it (e.g. online) the deck uses its built-in GPT-2 tokenizer in `js/tokenizer.js`, which gives identical tokens |
 | `vendor/fonts/*` | Inter, JetBrains Mono, Fraunces (SIL OFL) | copied from `@fontsource-variable/*` |
 | `models/gpt2/*` | `Xenova/gpt2` on Hugging Face | `tokenizer.json`, `tokenizer_config.json`, `config.json` |
 | `data/gpt2-emb-64.bin` | `openai-community/gpt2` `wte.weight` | `node tools/build-embeddings.mjs`: first 64 of 768 dims, int8 |

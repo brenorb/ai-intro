@@ -1,27 +1,16 @@
 // GPT-2 tokenizer + token-embedding lookup, all from local files.
-// Primary: transformers.js (vendor/transformers). Fallback: a small byte-level BPE built from the same tokenizer.json.
+// A small byte-level BPE that reads Hugging Face's tokenizer.json for GPT-2 (vocabulary, merges and
+// special tokens) and applies the same algorithm, so it gives the same tokens as the reference tokenizer.
 let ready = null;
 
-export async function viaTransformers() {
-  const mod = await import('../vendor/transformers/transformers.min.js');
-  mod.env.allowRemoteModels = false;
-  mod.env.allowLocalModels = true;
-  mod.env.useBrowserCache = false;
-  // must be a path, not an http(s) URL: transformers.js only treats non-URL paths as local
-  mod.env.localModelPath = new URL('../models/', import.meta.url).pathname;
-  const tok = await mod.AutoTokenizer.from_pretrained('gpt2');
-  return {
-    engine: 'transformers.js',
-    encode: (text) => Array.from(tok.encode(text)),
-    decode: (id) => tok.decode([id], { clean_up_tokenization_spaces: false }),
-  };
-}
-
-export async function viaBpe() {
+export async function loadBpe() {
   const tj = await (await fetch(new URL('../models/gpt2/tokenizer.json', import.meta.url))).json();
   const vocab = tj.model.vocab, merges = tj.model.merges;
   const rank = new Map(merges.map((m, i) => [Array.isArray(m) ? m.join(' ') : m, i]));
   const inv = []; for (const k in vocab) inv[vocab[k]] = k;
+  // special tokens (for GPT-2: <|endoftext|>) are matched whole before BPE, never split
+  const special = new Map((tj.added_tokens || []).map((t) => [t.content, t.id]));
+  const specialRe = special.size ? new RegExp(`(${[...special.keys()].map((s) => s.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')).join('|')})`) : null;
   // GPT-2's byte <-> printable unicode mapping
   const bs = []; for (let b = 33; b <= 126; b++) bs.push(b); for (let b = 161; b <= 172; b++) bs.push(b); for (let b = 174; b <= 255; b++) bs.push(b);
   const b2u = {}; let n = 0;
@@ -41,9 +30,9 @@ export async function viaBpe() {
     }
     return parts;
   };
+  const encodePlain = (text) => (text.match(pat) || []).flatMap((w) => bpe([...enc.encode(w)].map((b) => b2u[b]).join('')).map((p) => vocab[p]));
   return {
-    engine: 'built-in BPE',
-    encode: (text) => (text.match(pat) || []).flatMap((w) => bpe([...enc.encode(w)].map((b) => b2u[b]).join('')).map((p) => vocab[p])),
+    encode: (text) => (specialRe ? text.split(specialRe) : [text]).flatMap((piece, i) => (i % 2 ? [special.get(piece)] : encodePlain(piece))),
     decode: (id) => dec.decode(Uint8Array.from([...(inv[id] || '')].map((c) => u2b[c]))),
   };
 }
@@ -59,8 +48,7 @@ async function loadEmb() {
 
 export function loadTokenizer() {
   if (!ready) ready = (async () => {
-    let tk;
-    try { tk = await viaTransformers(); tk.encode('test'); } catch (e) { console.warn('transformers.js tokenizer unavailable, using built-in BPE:', e.message); tk = await viaBpe(); }
+    const tk = await loadBpe();
     const emb = await loadEmb().catch(() => null);
     return { ...tk, emb, tokens: (text) => tk.encode(text).map((id) => ({ id, text: tk.decode(id) })) };
   })();

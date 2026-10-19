@@ -244,7 +244,7 @@ CLICK — curate instead: the goal and what done means, the house rules, the two
     id: 'loop', scene: 'loop', state: 'close', steps: 3, part: 2, title: 'Goals and closing the loop', time: 2.0,
     captions: [
       { kicker: 'Goals and verification', h: '“Done!” is a sentence, not a status', sub: '' },
-      { h: 'Give it a goal and a way to check', sub: 'Then the loop can run until the check passes, and the proof comes with the answer.' },
+      { h: 'Close the loop', sub: 'Give it a goal <em>and a way to check</em>. Then the loop can run until the check passes, and the proof comes with the answer.' },
       { kicker: 'Ways to close the loop', h: 'Nothing it <em>says</em> becomes fact until something <em>happens</em>', sub: '' },
     ],
     notes: `The single most useful habit. An open loop: you ask, it answers "done, tested, all passes". That sentence is generated the same way as everything else — it's a plausible continuation, not a report. Look at what actually ran: nothing.

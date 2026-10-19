@@ -258,14 +258,16 @@ CLICK — the rule to take home: nothing it says becomes fact until something ha
     id: 'why-forgot', scene: 'why', state: 'forgot', steps: 3, part: 3, title: '“It forgot everything and got dumb”', time: 0.9, layout: 'quote',
     captions: [
       { kicker: 'Complaint 1 of 6', h: 'We were talking, and then it forgot everything and got dumb.', layout: 'quote big' },
-      { layout: 'quote', sub: '<b>Because:</b> the context window. Your early messages were out-massed, then dropped.' },
+      { layout: 'quote', sub: '<b>Because:</b> the context window. Long before it is full, it enters the “dumb zone”: too much noise, attention spread thin. Then the early messages fall off.' },
       {},
     ],
     notes: `Part 3: the complaints, each traced to the part we've already seen. Go fast — the audience now has the pictures.
 
 "It forgot." The context window again. CLICK and watch: your rules start as most of what it sees, shrink to a sliver, then fall off the edge. It didn't get dumber; it can't see them.
 
-CLICK — fixes: new topic, new chat. Standing rules in a file (AGENTS.md / project instructions), not in message one. For long work: summarise, restart.`,
+Even before anything falls off there's the "dumb zone": a long, noisy window where attention is spread thin and quality drops.
+
+CLICK — the fix is context engineering: keep the window small, fresh and relevant. Standing rules in AGENTS.md, not in message one. New topic, new chat; for long work, summarise and restart.`,
   },
   {
     id: 'why-rust', scene: 'why', state: 'rust', steps: 3, part: 3, title: '“It changed my Simplicity into Rust”', time: 0.9, layout: 'quote',
@@ -302,7 +304,7 @@ CLICK — fixes: ask for the evidence, not the statement. Better: let the harnes
     ],
     notes: `The famous one. Remember the tokenizer: "strawberry" is three tokens, three numbers. There are no letters in there to count. And there's no counter either — the model never executes a procedure, it predicts what an answer usually looks like. Newer models have mostly memorised this particular one; the class of problem remains.
 
-CLICK — the fix is the most important idea in the talk: don't ask it to BE the calculator. Ask it to WRITE the calculator. One line of code, run by the harness, and the answer is exact. Same for arithmetic, dates, sorting, counting rows in a spreadsheet.`,
+CLICK — what to do: code. The most important idea in the talk: don't ask it to BE the calculator. Ask it to WRITE the calculator. One line of code, run by the harness, and the answer is exact. Same for arithmetic, dates, sorting, counting rows in a spreadsheet.`,
   },
   {
     id: 'why-injection', scene: 'why', state: 'injection', steps: 3, part: 3, title: '“It followed instructions hidden in a web page”', time: 0.9, layout: 'quote',
@@ -315,7 +317,7 @@ CLICK — the fix is the most important idea in the talk: don't ask it to BE the
 
 A language model has nothing like that. System prompt, your message, a web page, a file, a tool result — one stream of tokens, one type. Imperative text inside a page is read with the same attention as your own request. There's nothing to escape or sanitise against, so no prompt fully fixes it.
 
-CLICK — so the fix is architectural: give the agent only the tools the task needs; if it's reading untrusted content, don't also hand it dangerous tools; and keep a human approval on anything irreversible — send, pay, delete, deploy.`,
+CLICK — so the fix is architectural: give the agent only the tools the task needs; run it in a sandbox with guardrails, so a hijacked agent can't reach anything that matters; if it's reading untrusted content, don't also hand it dangerous tools; and keep a human approval on anything irreversible — send, pay, delete, deploy.`,
   },
   {
     id: 'why-bland', scene: 'why', state: 'bland', steps: 3, part: 3, title: '“Every answer sounds the same”', time: 0.9, layout: 'quote',
@@ -326,7 +328,7 @@ CLICK — so the fix is architectural: give the agent only the tools the task ne
     ],
     notes: `Last one. The training objective rewards being unsurprising, so by default you get the centre of the distribution: the average opinion in the average voice.
 
-CLICK — it can write differently, but you have to pull it away from the centre with context: show two or three examples of the voice you want; name the audience and what to avoid; ask for three genuinely different takes and pick.`,
+CLICK — it can write differently, but you have to pull it away from the centre with context: show two or three examples of the voice you want; name the audience and what to avoid. Then have an adversarial subagent review the draft for exactly what you don't want ("flag every cliché, filler phrase and hedge"), so you aren't the one hunting for it. Or ask for three genuinely different takes and pick.`,
   },
   {
     id: 'close', scene: 'title', state: 'close', part: 4, title: 'Close', time: 0.6, layout: 'center',

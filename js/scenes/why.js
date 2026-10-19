@@ -7,12 +7,12 @@ import { loadTokenizer } from '../tokenizer.js';
 import { CHIP_COLORS, showTok } from './tokens.js';
 
 const FIXES = {
-  forgot: ['New topic, new chat', 'Standing rules go in a file, not in message 1', 'Ask for a summary, restart from it'],
+  forgot: ['Context engineering: keep the window small, fresh and relevant', 'Standing rules go in AGENTS.md, not in message 1', 'New topic, new chat; summarize, then restart'],
   rust: ['Say what is unusual: “SimplicityHL, not Rust”', 'Give it docs and examples (a skill)', 'Let the compiler correct it, in the loop'],
   tested: ['Ask for the evidence: the actual output', 'Let the harness run the check', 'Push back with facts, not with pressure'],
-  strawberry: ['Exact answers come from code', 'Ask it to write the program and run it', 'Same for sums, dates, sorting, counting'],
-  injection: ['Give it only the tools the task needs', 'Untrusted input: no dangerous tools', 'You approve anything irreversible'],
-  bland: ['Show examples of the voice you want', 'Name the audience and what to avoid', 'Ask for three different takes'],
+  strawberry: ['Code: a program does the counting', 'Ask it to write the code and run it', 'Same for sums, dates, sorting, counting'],
+  injection: ['Give it only the tools the task needs', 'Run it in a sandbox, with guardrails', 'Untrusted input: no dangerous tools', 'You approve anything irreversible'],
+  bland: ['Show examples of the voice you want', 'Name the audience and what to avoid', 'Have an adversarial subagent review it for exactly what you don’t want', 'Ask for three different takes'],
 };
 const SIMF = '<span class="k">fn</span> <span class="f">main</span>() {\n  jet::bip_0340_verify(\n    (param::PUBLIC_KEY,\n     jet::sig_all_hash()),\n    witness::SIGNATURE)\n}';
 const RUST = '<span class="k">use</span> secp256k1::{Secp256k1, Message};\n\n<span class="k">fn</span> <span class="f">main</span>() {\n  <span class="k">let</span> secp = Secp256k1::new();\n  secp.verify_schnorr(&sig, &msg, &pk)\n      .unwrap();\n}';
@@ -28,7 +28,7 @@ export default function create(root) {
   // fixes column
   const fixCol = h('div', { style: 'position:absolute;left:1170px;top:470px;width:640px;display:flex;flex-direction:column;gap:16px' }, root);
   h('div', { class: 'because', style: 'color:var(--ok)', text: 'What to do' }, fixCol);
-  const fixEls = [0, 1, 2].map(() => h('div', { class: 'fix' }, fixCol));
+  const fixEls = [0, 1, 2, 3].map(() => h('div', { class: 'fix' }, fixCol));
 
   // ---------- 1. forgot: the window ----------
   const g1 = mk('forgot');
@@ -115,7 +115,8 @@ export default function create(root) {
     timers.splice(0).forEach((t) => t.kill());
     for (const name in groups) to(groups[name], { autoAlpha: name === state && step >= 1 ? 1 : 0, y: name === state && step >= 1 ? 0 : 30, duration: 0.6 });
     // fixes
-    (FIXES[state] || []).forEach((t, i) => { fixEls[i].textContent = t; });
+    const fx = FIXES[state] || [];
+    fixEls.forEach((el, i) => { el.textContent = fx[i] || ''; el.style.display = fx[i] ? '' : 'none'; });
     to(fixCol, { autoAlpha: step >= 2 ? 1 : 0, duration: 0.4 });
     if (step >= 2 && !instant) gsap.fromTo(fixEls, { autoAlpha: 0, x: 40 }, { autoAlpha: 1, x: 0, duration: 0.45, stagger: 0.14, delay: 0.15 });
     else gsap.set(fixEls, { autoAlpha: 1, x: 0 });

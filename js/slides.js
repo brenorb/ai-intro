@@ -212,7 +212,7 @@ CLICK — MCP, the Model Context Protocol, is a standard plug for adding tools: 
 
 Left: everything you could give it. Right: the window, empty. Nothing in there yet means it knows nothing about your situation.
 
-CLICK — the common move: dump it all in. The whole repo, three weeks of chat, pasted logs, old dead ends. It overflows, and the four things that matter are squeezed in the middle, where attention is weakest.
+CLICK — the common move: dump it all in. The whole repo, three weeks of chat, pasted logs, old dead ends. It doesn't fit, and the four things that matter become a small part of what it reads, lost in the noise.
 
 CLICK — curate instead: the goal and what done means, the house rules, the two files that matter, a short summary. Hygiene, not clever wording: new task, new chat; durable things in files; summarize and restart; load only what's relevant.`,
   },

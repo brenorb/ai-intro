@@ -121,7 +121,7 @@ export default function create(root) {
       to(empty, { autoAlpha: step === 0 ? 1 : 0, duration: 0.4 });
       efr.style.borderColor = step === 1 ? C.bad : step === 2 ? C.ok : C.ink;
       engWinLbl.style.color = step === 1 ? C.bad : step === 2 ? C.ok : C.ink;
-      engNote.innerHTML = step === 1 ? 'Overflowing. What matters is about a quarter of it, squeezed in the middle.' : step === 2 ? 'Less than half full, and all of it relevant. The rest is room for the work.' : '';
+      engNote.innerHTML = step === 1 ? 'It doesn’t fit. The four cards that matter are now a small part of the window, lost among logs, history and dead ends.' : step === 2 ? 'Less than half full, and all of it relevant. The rest is room for the work.' : '';
       Object.assign(engNote.style, step === 1 ? { left: '110px', top: '360px', width: '900px', fontSize: '40px', color: 'var(--bad)' } : { left: '1130px', top: '920px', width: '680px', fontSize: '26px', color: 'var(--dim)' });
       to(engFixes, { autoAlpha: step === 2 ? 1 : 0, delay: instant ? 0 : 0.6 });
     }

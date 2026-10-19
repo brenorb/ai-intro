@@ -253,21 +253,6 @@ CLICK — close the loop. Give it a goal it can check and the means to check it:
 
 CLICK — the rule to take home: nothing it says becomes fact until something happens. And there are many ways to make something happen — pick whichever your task allows. Even for non-code work: "check every number in this summary against the source and list any that don't match".`,
   },
-  {
-    id: 'workflow', scene: 'loop', state: 'workflow', steps: 2, part: 2, title: 'A simple workflow', time: 1.0,
-    captions: [
-      { kicker: 'A workflow that works', h: 'Plan, do, verify, review', sub: '' },
-      { h: 'Small steps, checked often', sub: 'Errors compound inside a long run. A check between steps stops them early.' },
-    ],
-    notes: `Put together, a workflow that works for almost anything:
-
-Plan — before anything is built, agree on the goal and on what "done" means. Ask it to restate the task, including what's unusual about your case.
-Do — one small step.
-Verify — a real check, run by the agent.
-Review — you look at what changed. Then the next step.
-
-CLICK — why small steps: every token is conditioned on everything before it, so an early mistake becomes a "fact" for the rest of the run. One big leap gives you one chance to catch it, at the end. Small checked steps catch it while it's cheap.`,
-  },
   // ------------------------------------------------------------------ Part 3
   {
     id: 'why-forgot', scene: 'why', state: 'forgot', steps: 3, part: 3, title: '“It forgot everything and got dumb”', time: 0.9, layout: 'quote',

@@ -7,7 +7,7 @@ const STEPS = [
   ['2010', 'First neural network: telling musical instruments apart'],
   ['2013', 'Engineering thesis: a reinforcement-learning trading bot'],
   ['2017', 'Into Bitcoin: Portuguese BIP39 wordlist, translating O Padrão Bitcoin'],
-  ['LLMs', 'Satoshi 7B, the first open-source Bitcoin language model'],
+  ['2023', 'Satoshi 7B, the first open-source Bitcoin language model'],
   ['Hackathons', 'Prizes with LLM code assistants for Bitcoin smart contracts'],
   ['Now', 'Agent skills for Bitcoin and Nostr; talks on agentic engineering'],
 ];

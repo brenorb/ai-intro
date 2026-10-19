@@ -27,13 +27,13 @@ Three parts: what's inside (8 min), the moving parts around the model (10 min), 
   },
   {
     id: 'about', scene: 'about', state: 'about', part: 0, title: 'Who’s talking', time: 0.7,
-    photo: '', // e.g. 'assets/me.jpg' (square works best); empty shows the BB monogram
+    photo: 'assets/me.jpg', // square works best; '' shows a BB monogram
     caption: { kicker: 'Who’s talking', h: 'Breno Brito', sub: 'Engineer working where AI meets Bitcoin. Building neural networks since 2010.' },
     notes: `Keep it to 40 seconds; the timeline lights up on its own.
 
 Engineer by training. First neural network in 2010, in Matlab, telling musical instruments apart. 2013: graduated with a reinforcement-learning trading bot. Bitcoin since 2017: co-author of the Portuguese BIP39 wordlist, translated O Padrão Bitcoin and other books.
 
-Then language models: Satoshi 7B, the first open-source Bitcoin LLM; prizes in Bitcoin hackathons with LLM code assistants for smart contracts. Now: agent skills for Bitcoin and Nostr (Freedom Skills), and talks on going from vibe coding to agentic engineering.
+Then language models: in 2023, Satoshi 7B, the first open-source Bitcoin LLM; prizes in Bitcoin hackathons with LLM code assistants for smart contracts. Now: agent skills for Bitcoin and Nostr (Freedom Skills), and talks on going from vibe coding to agentic engineering.
 
 Why it matters for today: I use these agents every day, and most of what I'll show comes from watching them fail.`,
   },

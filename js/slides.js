@@ -20,7 +20,7 @@ export const PARTS = ['', 'Part 1 · What’s inside the machine', 'Part 2 · Fr
 export const SLIDES = [
   {
     id: 'title', scene: 'title', state: 'title', part: 0, title: 'Title', time: 0.5, layout: 'center',
-    caption: { kicker: 'A 25-minute field guide', h: 'Making AI work for you', sub: 'What’s inside the machine, the parts you control, and why it does <em>that</em>.' },
+    caption: { h: 'Making AI work for you', sub: 'What’s inside the machine, the parts you control, and why it does <em>that</em>.' },
     notes: `Promise of the talk: you'll leave understanding the machine just enough that its weird behaviour stops being surprising — and knowing which parts you can actually control.
 
 Three parts: what's inside (8 min), the moving parts around the model (10 min), then we go back through the classic complaints and trace each to its cause (6 min). Then open conversation.`,

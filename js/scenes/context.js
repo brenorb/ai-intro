@@ -1,7 +1,8 @@
 // Scene "context": the context window as a fixed buffer.
 // States: 'window'   (0 what it is · 1 it fills, your share thins · 2 overflow: gone · 3 re-read every time)
 //         'engineer' (0 everything you could give it · 1 dump it all in · 2 curate)  — its own layout, not the strip
-//         'files'    (0 AGENTS.md always loaded · 1 skills on the shelf · 2 the matching skill loads)
+//         'agents'   (0 the file · 1 loaded at the start of every session)
+//         'skills'   (0 only descriptions sit in the window · 1 the matching skill loads)
 import { gsap, h, s, C, mover, rng } from '../lib.js';
 import { createWinBar } from '../winbar.js';
 
@@ -76,16 +77,23 @@ export default function create(root) {
   const SK = [['simplicity-contracts', 'Write and compile SimplicityHL'], ['pdf-reports', 'Build PDF reports'], ['code-review', 'Our review checklist'], ['brand-voice', 'How we write'], ['deploy', 'Release steps'], ['data-queries', 'Warehouse tables']];
   const skEls = SK.map(([n, d]) => h('div', { style: 'border:2px solid var(--line);border-radius:14px;background:var(--panel);padding:14px 18px', html: `<div style="font:600 23px var(--mono);color:#ff9d8a">${n}</div><div style="font:400 20px var(--sans);color:var(--dim);margin-top:4px">${d}</div>` }, shelfGrid));
   const task = h('div', { class: 'bubble you', style: 'position:absolute;left:820px;top:610px;font-size:28px;margin:0', text: '“Write a contract that checks one signature.”' }, root);
+  const aka = h('div', { style: 'position:absolute;left:820px;top:350px;width:990px;font:400 30px/1.4 var(--sans);color:var(--dim)', html: 'Same idea, different names: <b style="color:var(--ink)">CLAUDE.md</b> in Claude Code, <b style="color:var(--ink)">AGENTS.md</b> in Codex and others, <b style="color:var(--ink)">project instructions</b> on claude.ai and ChatGPT.' }, root);
+  const session = h('div', { style: 'position:absolute;left:820px;top:530px;font:600 34px var(--mono);color:#ffe08a' }, root);
+  const sessionNote = h('div', { style: 'position:absolute;left:820px;top:600px;width:990px;font:400 28px/1.4 var(--sans);color:var(--dim)', html: 'Every new session starts with it. The rule no longer lives in message 1 of an old chat.' }, root);
+  const skillCard = h('div', { class: 'codecard', style: 'position:absolute;left:110px;top:350px;width:640px;height:330px;font-size:23px;border-color:#ff9d8a' }, root);
+  skillCard.innerHTML = `<span class="s">simplicity-contracts/</span>\n├── <span class="f">SKILL.md</span>   <span class="c">name + one line</span>\n│              <span class="c">+ full instructions</span>\n├── examples/  <span class="c">working contracts</span>\n├── docs/      <span class="c">language reference</span>\n└── scripts/   <span class="c">compile + test</span>`;
+  let sessionTl = null;
 
-  const hideAll = (to) => { [share, usvg, gone, reread, agentsCard, shelf, task, verdict, eng, engFixes].forEach((e) => to(e, { autoAlpha: 0, duration: 0.4 })); };
+  const hideAll = (to) => { [share, usvg, gone, reread, agentsCard, shelf, task, verdict, eng, engFixes, aka, session, sessionNote, skillCard].forEach((e) => to(e, { autoAlpha: 0, duration: 0.4 })); };
   const verdict = h('div', { style: 'position:absolute;left:110px;top:800px;width:1700px;font:500 34px/1.35 var(--sans);color:var(--dim)' }, root);
 
   function update({ state, step, instant, prevState }) {
     const to = mover(instant);
     const opts = { instant, stagger: 0.035 };
     scanTl && scanTl.kill(); scanTl = null; gsap.set(scan, { autoAlpha: 0 });
+    sessionTl && sessionTl.kill(); sessionTl = null;
     hideAll(to);
-    to(wrap, { y: state === 'files' ? 190 : 0, autoAlpha: state === 'engineer' ? 0 : 1, duration: 0.9 });
+    to(wrap, { y: state === 'agents' || state === 'skills' ? 190 : 0, autoAlpha: state === 'engineer' ? 0 : 1, duration: 0.9 });
     bar.frame.dataset.label = 'Context window';
 
     if (state === 'window') {
@@ -126,19 +134,38 @@ export default function create(root) {
       to(engFixes, { autoAlpha: step === 2 ? 1 : 0, delay: instant ? 0 : 0.6 });
     }
 
-    if (state === 'files') {
+    if (state === 'agents' || state === 'skills') {
       const sys = { key: 'sys', kind: 'sys', size: 5, label: 'System' };
       const ag = { key: 'agents', kind: 'agents', size: 9, label: 'AGENTS.md' };
       const slivers = SK.map((sk, i) => ({ key: 'sk' + i, kind: 'skill', size: 1.4 }));
-      to(agentsCard, { autoAlpha: 1 });
       bar.frame.dataset.label = 'Context window · a brand-new session';
-      if (step === 0) bar.set([sys, ag], opts);
-      else if (step === 1) bar.set([sys, ag, ...slivers], opts);
-      else bar.set([sys, ag, ...slivers, { key: 'task', kind: 'you', size: 5, label: 'Task' }, { key: 'skfull', kind: 'skill', size: 17, label: 'simplicity-contracts (full)' }], opts);
-      to(shelf, { autoAlpha: step >= 1 ? 1 : 0 });
-      to(task, { autoAlpha: step >= 2 ? 1 : 0 });
-      skEls.forEach((e, i) => gsap.to(e, { borderColor: step >= 2 && i === 0 ? '#ff9d8a' : '#2a3347', opacity: step >= 2 && i !== 0 ? 0.4 : 1, scale: step >= 2 && i === 0 ? 1.04 : 1, duration: instant ? 0 : 0.5 }));
+      if (state === 'agents') {
+        to(agentsCard, { autoAlpha: 1 });
+        to(aka, { autoAlpha: step === 0 ? 1 : 0 });
+        if (step === 0) bar.set([], opts);
+        else {
+          to(session, { autoAlpha: 1 }); to(sessionNote, { autoAlpha: 1 });
+          const days = ['Monday', 'Wednesday', 'Friday'];
+          if (instant) { session.textContent = 'Every session'; bar.set([sys, ag], opts); }
+          else {
+            sessionTl = gsap.timeline({ repeat: -1 });
+            days.forEach((d) => {
+              sessionTl.call(() => { session.textContent = `${d}: new session`; bar.set([], { stagger: 0 }); });
+              sessionTl.to({}, { duration: 0.5 });
+              sessionTl.call(() => bar.set([sys, ag], opts));
+              sessionTl.to({}, { duration: 1.9 });
+            });
+          }
+        }
+      } else {
+        to(skillCard, { autoAlpha: 1 });
+        to(shelf, { autoAlpha: 1 });
+        to(task, { autoAlpha: step >= 1 ? 1 : 0 });
+        if (step === 0) bar.set([sys, ag, ...slivers], opts);
+        else bar.set([sys, ag, ...slivers, { key: 'task', kind: 'you', size: 5, label: 'Task' }, { key: 'skfull', kind: 'skill', size: 17, label: 'simplicity-contracts (full)' }], opts);
+        skEls.forEach((e, i) => gsap.to(e, { borderColor: step >= 1 && i === 0 ? '#ff9d8a' : '#2a3347', opacity: step >= 1 && i !== 0 ? 0.4 : 1, scale: step >= 1 && i === 0 ? 1.04 : 1, duration: instant ? 0 : 0.5 }));
+      }
     }
   }
-  return { update, exit() { scanTl && scanTl.kill(); scanTl = null; } };
+  return { update, exit() { scanTl && scanTl.kill(); scanTl = null; sessionTl && sessionTl.kill(); sessionTl = null; } };
 }

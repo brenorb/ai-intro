@@ -202,6 +202,30 @@ Demystify tool use. The model never "does" anything; it writes a small piece of 
 CLICK — MCP, the Model Context Protocol, is a standard plug for adding tools: GitHub, Drive, Slack, databases, a browser, your own internal API. Each one adds things the agent can do — and things you now need to supervise.`,
   },
   {
+    id: 'agentsmd', scene: 'context', state: 'agents', steps: 2, part: 2, title: 'AGENTS.md', time: 1.0,
+    captions: [
+      { kicker: 'Context that survives the session', h: 'AGENTS.md: your standing rules, in a file', sub: 'A plain text file in your project: what it is, how to build it, what never to do.' },
+      { h: 'Loaded at the start of every session', sub: 'The harness puts it in the window before you type anything.' },
+    ],
+    notes: `First tool for getting the right things into the window without retyping them.
+
+AGENTS.md is a plain file with standing rules: what this project is, how to build and test it, what never to do. Claude Code calls it CLAUDE.md; on claude.ai and ChatGPT it's "project instructions". Same idea.
+
+CLICK — the harness loads it at the start of every session: Monday, Wednesday, Friday, always there. It's how you fix "I told it on Monday and by Friday it forgot": the rule no longer lives in message 1 of a chat.`,
+  },
+  {
+    id: 'skills', scene: 'context', state: 'skills', steps: 2, part: 2, title: 'Skills', time: 1.0,
+    captions: [
+      { kicker: 'Context that survives the session', h: 'Skills: knowledge loaded only when needed', sub: 'A skill is a folder of instructions, examples and scripts. Only its one-line description sits in the window.' },
+      { h: 'The right knowledge, at the right moment', sub: 'When the task matches, the whole skill is pulled in. This is how your conventions beat the training data.' },
+    ],
+    notes: `Second tool. A skill is a folder: a SKILL.md with a name, a one-line description and full instructions, plus examples, docs and scripts.
+
+Only the one-line descriptions sit in the window, so ten skills cost almost nothing.
+
+CLICK — when the task matches, the full skill is loaded. This is the answer to "it wrote Rust instead of Simplicity": the model's training barely contains SimplicityHL, so you supply it — docs and examples, exactly when needed.`,
+  },
+  {
     id: 'ctxeng', scene: 'context', state: 'engineer', steps: 3, part: 2, title: 'Context engineering', time: 1.5, layout: 'compact',
     captions: [
       { kicker: 'Context engineering', h: 'You choose what it gets to see', sub: 'It only knows what is in the window. Context engineering is deciding what goes in, and what stays out.' },
@@ -215,21 +239,6 @@ Left: everything you could give it. Right: the window, empty. Nothing in there y
 CLICK — the common move: dump it all in. The whole repo, three weeks of chat, pasted logs, old dead ends. It doesn't fit, and the four things that matter become a small part of what it reads, lost in the noise.
 
 CLICK — curate instead: the goal and what done means, the house rules, the two files that matter, a short summary. Hygiene, not clever wording: new task, new chat; durable things in files; summarize and restart; load only what's relevant.`,
-  },
-  {
-    id: 'memory', scene: 'context', state: 'files', steps: 3, part: 2, title: 'AGENTS.md and skills', time: 1.5,
-    captions: [
-      { kicker: 'Context that survives the session', h: 'AGENTS.md: loaded every time', sub: 'A plain text file with your standing rules. The harness puts it in the window at the start of every session.' },
-      { h: 'Skills: loaded when needed', sub: 'A skill is a folder of instructions and examples. Only its one-line description sits in the window.' },
-      { h: 'The right knowledge, at the right moment', sub: 'When the task matches, the whole skill is pulled in. This is how your conventions beat the training data.' },
-    ],
-    notes: `Two mechanisms for getting the right things into the window without retyping them.
-
-AGENTS.md (CLAUDE.md in Claude Code; "project instructions" on the websites): a plain file with standing rules. The harness loads it at the start of every session. It's how you fix "I told it on Monday and by Friday it forgot" — the rule no longer lives in message 1 of a chat.
-
-CLICK — skills. A skill is a folder: instructions, examples, maybe scripts. Only a one-line description sits in the window, so ten skills cost almost nothing.
-
-CLICK — when the task matches, the full skill is loaded. This is the answer to "it wrote Rust instead of Simplicity": the model's training barely contains SimplicityHL, so you supply it — docs and examples, exactly when needed.`,
   },
   {
     id: 'loop', scene: 'loop', state: 'close', steps: 3, part: 2, title: 'Goals and closing the loop', time: 2.0,

@@ -45,7 +45,7 @@ The URL always holds the current position (`#attention.2`), so a reload comes ba
 |---|---|---|
 | Title + who's talking | | 1.2 |
 | **1 · What's inside the machine** | neuron (1943) → zoom out → universal approximation → classifier vs generator → training pipeline → tokens (live) → attention → context window → Transformer Explainer (live) | ≈ 9 |
-| **2 · From model to agent** | chat vs agent → tools & MCP → context engineering → AGENTS.md and skills → goals and closing the loop → workflow | ≈ 8.5 |
+| **2 · From model to agent** | chat vs agent → tools & MCP → AGENTS.md → skills → context engineering → closing the loop | ≈ 8 |
 | **3 · "Why did it do that?"** | six complaints, each traced to its cause and its fix | ≈ 5.5 |
 | Close | | 0.6 |
 

@@ -52,14 +52,18 @@ function setCaption(slide, step, instant) {
   };
   const prev = capKey ? JSON.parse(capKey) : [];
   capKey = key;
-  if (instant) { gsap.killTweensOf([kickerEl, headEl, subEl]); apply(); gsap.set([kickerEl, headEl, subEl], { autoAlpha: 1, y: 0, clearProps: 'transform' }); return; }
+  // stop whatever caption animation is running and drop its leftovers (an interrupted Flip
+  // morph would otherwise leave the headline squeezed by a half-finished scale)
+  const lines = [kickerEl, headEl, subEl];
+  gsap.killTweensOf(lines);
+  gsap.set(lines, { clearProps: 'transform,width,height' });
+  if (instant) { apply(); gsap.set(lines, { autoAlpha: 1, y: 0 }); return; }
   // same headline, different layout (e.g. big quote → quote with explanation): move it instead of swapping it
   if (prev[1] === c.h && prev[0] === c.kicker && prev[3] !== layout) {
-    gsap.killTweensOf([kickerEl, headEl, subEl]);
     gsap.set([kickerEl, headEl], { autoAlpha: 1, y: 0 });
     const st = window.Flip.getState([kickerEl, headEl]);
     apply();
-    window.Flip.from(st, { duration: 0.9, ease: 'power3.inOut', scale: true });
+    window.Flip.from(st, { duration: 0.9, ease: 'power3.inOut', scale: true, onComplete: () => gsap.set([kickerEl, headEl], { clearProps: 'transform,width,height' }) });
     gsap.fromTo(subEl, { autoAlpha: 0, y: 14 }, { autoAlpha: 1, y: 0, duration: 0.5, delay: 0.55 });
     return;
   }
@@ -68,7 +72,6 @@ function setCaption(slide, step, instant) {
   if (prev[0] !== c.kicker || prev[3] !== layout) changed.push(kickerEl);
   if (prev[1] !== c.h || prev[3] !== layout) changed.push(headEl);
   if (prev[2] !== c.sub || prev[3] !== layout) changed.push(subEl);
-  gsap.killTweensOf([kickerEl, headEl, subEl]);
   gsap.to(changed, {
     autoAlpha: 0, y: -10, duration: 0.22, ease: 'power2.in', overwrite: true,
     onComplete: () => {

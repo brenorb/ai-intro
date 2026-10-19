@@ -117,7 +117,7 @@ CLICK — and then it's frozen. It doesn't learn from your chats. Anything new o
   {
     id: 'tokens', scene: 'tokens', state: 'tokens', steps: 2, part: 1, title: 'Tokens (live widget)', time: 1.0, layout: 'compact', interactive: true,
     captions: [
-      { kicker: 'What the model actually sees', h: 'Not words. Not letters. Tokens.', sub: 'Text is chopped into pieces from a fixed vocabulary. Type anything.' },
+      { kicker: 'What the model actually sees', h: 'Not words. Not letters. Tokens.', sub: 'Text is chopped into pieces from a fixed vocabulary. <b>Type anything in the box below.</b>' },
       { h: 'A token is a number that looks up a vector', sub: 'The model never sees the letters: only the index, and the list of numbers stored at that index.' },
     ],
     notes: `Live demo — type in the box. (Click the box first; PageDown / the on-screen arrow moves on.)
@@ -132,7 +132,7 @@ CLICK — each token is just an index into a table. The index looks up a vector:
     id: 'attention', scene: 'attention', state: 'attention', steps: 4, part: 1, title: 'Attention', time: 1.0,
     captions: [
       { kicker: '2017 · “Attention is all you need”', h: 'Every token is a vector', sub: 'On their own they are just a list. Meaning comes from how they relate to each other.' },
-      { h: 'Each token looks back at all the others', sub: 'What does “it” refer to? The token scores every earlier token for relevance.' },
+      { h: 'Each token looks back at all the others', sub: 'This is the <b>attention mechanism</b>. What does “it” refer to? The token scores every earlier token for relevance.' },
       { h: 'The scores become shares of 100%', sub: 'Attention is a <b>fixed budget</b>. More for one token always means less for the rest.' },
       { h: 'Every token gets its own split', sub: 'This happens for every token, in every layer, on every step.' },
     ],

@@ -87,7 +87,7 @@ The punchline: "what text comes next" is also just a function — from the text 
     ],
     notes: `Classical machine learning: classification. One input, one label, a confidence. Deterministic.
 
-CLICK — a language model doesn't output an answer. It outputs a probability for every one of its ~50,000 tokens. These bars are real: GPT-2 on "The best thing about AI is".
+CLICK — a language model doesn't output an answer. It outputs a probability for every one of its ~50,000 tokens. These bars are real GPT-2 numbers for "The best thing about AI is", computed ahead of time (the model itself isn't running here).
 
 CLICK — then a random number generator picks one, weighted by probability. Usually a likely one, sometimes not. The pick is appended to the text and the model runs again on the longer text. One token at a time; it can't go back.
 

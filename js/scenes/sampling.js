@@ -43,7 +43,7 @@ export default function create(root) {
   const genTag = h('div', { class: 'note', style: 'position:absolute;left:0;top:-44px;color:var(--ai)', text: 'GENERATIVE AI' }, gen);
 
   let data = null, tl = null, wantStep = -1;
-  fetch('data/sampling.json').then((r) => r.json()).then((d) => { data = d; src.textContent = `Real probabilities from ${d.model}: temperature ${d.temperature}, top-${d.topK} sampling, vocabulary of 50,257 tokens.`; if (wantStep >= 1) render(wantStep, true); });
+  fetch('data/sampling.json').then((r) => r.json()).then((d) => { data = d; src.textContent = `Real ${d.model} probabilities, computed ahead of time and stored in the slides (data/sampling.json): temperature ${d.temperature}, top-${d.topK} sampling, vocabulary of 50,257 tokens.`; if (wantStep >= 1) render(wantStep, true); });
 
   const show = (t) => t.replace(/\n/g, '↵');
   function drawDist(st, pick) {

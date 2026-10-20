@@ -1,5 +1,5 @@
 {
-  "name": "ai-talk-tools",
+  "name": "ai-intro-tools",
   "private": true,
   "type": "module",
   "description": "Dev-only helpers for the deck (verification screenshots, data builders). Not needed to present.",

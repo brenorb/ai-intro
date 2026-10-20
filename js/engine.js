@@ -8,7 +8,7 @@ const params = new URLSearchParams(location.search);
 const skipIds = new Set((params.get('skip') || '').split(',').filter(Boolean));
 const SLIDES = ALL_SLIDES.filter((sl) => !sl.skip && !skipIds.has(sl.id));
 const isPresenter = params.has('presenter');
-const channel = 'BroadcastChannel' in window ? new BroadcastChannel('ai-talk-deck') : null;
+const channel = 'BroadcastChannel' in window ? new BroadcastChannel('ai-intro-deck') : null;
 
 const $ = (q) => document.querySelector(q);
 const stage = $('#stage'), scenesEl = $('#scenes'), captionEl = $('#caption');
@@ -194,7 +194,7 @@ function onKey(e) {
   else if (k.toLowerCase() === 'o') { overviewEl.hidden = !overviewEl.hidden; if (!overviewEl.hidden) renderOverview(); }
   else if (k === 'Escape') { overviewEl.hidden = true; helpEl.hidden = true; }
   else if (k.toLowerCase() === 'f') { document.fullscreenElement ? document.exitFullscreen() : document.documentElement.requestFullscreen(); }
-  else if (k.toLowerCase() === 'p') window.open(location.pathname + '?presenter', 'ai-talk-presenter', 'width=900,height=700');
+  else if (k.toLowerCase() === 'p') window.open(location.pathname + '?presenter', 'ai-intro-presenter', 'width=900,height=700');
   else if (k === '?') helpEl.hidden = !helpEl.hidden;
 }
 

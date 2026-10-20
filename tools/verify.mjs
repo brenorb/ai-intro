@@ -10,7 +10,7 @@ import puppeteer from 'puppeteer-core';
 import { mkdirSync, writeFileSync } from 'node:fs';
 
 const [out = 'shots', W = '1920', H = '1080', mode = 'walk'] = process.argv.slice(2);
-const URL_ = process.env.DECK_URL || 'http://localhost:4173/ai-talk/';
+const URL_ = process.env.DECK_URL || 'http://localhost:4173/';
 mkdirSync(out, { recursive: true });
 const browser = await puppeteer.launch({ executablePath: process.env.CHROME || '/Applications/Google Chrome.app/Contents/MacOS/Google Chrome', headless: 'new', args: [`--window-size=${W},${H}`, '--hide-scrollbars'] });
 const page = await browser.newPage();

@@ -9,7 +9,7 @@ await page.setRequestInterception(true);
 page.on('request', (r) => { const u = r.url(); if (/^(https?:\/\/(localhost|127\.0\.0\.1)(:\d+)?\/|data:|blob:)/.test(u)) r.continue(); else { blocked.push(u); r.abort(); } });
 page.on('pageerror', (e) => errors.push(e.message));
 page.on('console', (m) => m.type() === 'error' && errors.push(m.text()));
-await page.goto((process.env.DECK_URL || 'http://localhost:4173/ai-talk/') + 'explainer/', { waitUntil: 'load' });
+await page.goto((process.env.DECK_URL || 'http://localhost:4173/') + 'explainer/', { waitUntil: 'load' });
 const t0 = Date.now();
 await page.waitForFunction(() => { const b = [...document.querySelectorAll('button')].find((x) => /generate/i.test(x.textContent)); return b && !b.disabled; }, { timeout: 180000 });
 const loadMs = Date.now() - t0;

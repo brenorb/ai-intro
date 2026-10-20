@@ -8,13 +8,13 @@ A 20–30 minute talk as one morphing HTML stage: what's inside the machine, the
 python3 serve.py
 ```
 
-Then open <http://localhost:4173/ai-talk/> (plain `http://localhost:4173/` redirects there). (A local server is needed because browsers won't load modules, the tokenizer or the model from `file://`.)
+Then open <http://localhost:4173/>. (A local server is needed because browsers won't load modules, the tokenizer or the model from `file://`.)
 
 **Before the talk:** open the deck once and visit the *Transformer Explainer* slide so its model (197 MB, local copy) is read into the browser cache; after that it starts in a second. Press `F` for fullscreen.
 
 ## Online (GitHub Pages)
 
-The repo publishes as-is from `main` at `https://brenorb.github.io/ai-talk/` (about 7 MB; no model weights in git). The local server uses the same `/ai-talk/` path so the two behave identically.
+The repo publishes as-is from `main` to **<https://ai-intro.brenorb.com/>** (about 7 MB; no model weights in git). The `CNAME` file sets that domain; DNS has a CNAME record `ai-intro` → `brenorb.github.io`. The site lives at the domain root, and the local server serves the folder at its root too, so the two behave the same.
 
 **The Transformer Explainer slide has two sources:**
 - **Online** it embeds the original at <https://poloclub.github.io/transformer-explainer/>, which downloads its own GPT-2 from there.
@@ -102,13 +102,13 @@ What is real and what is illustrative is labelled on the slides: the tokenizer, 
 | `explainer/` (local only) | [poloclub/transformer-explainer](https://github.com/poloclub/transformer-explainer) (MIT), commit in `tools/explainer-upstream-commit.txt` | see below |
 | `assets/explainer-fallback.jpg` | screenshot of the local Explainer | shown under the live demo until it loads |
 
-**Rebuilding the Explainer copy:** clone the repo at that commit, apply `tools/explainer-offline.patch` (local ONNX runtime, local tokenizer, local KaTeX CSS, no Google Fonts, no YouTube embed, configurable base path, Vite bumped to match its Svelte plugin, model read from `model-int8/` in 20 chunks). Shrink the model: join `static/model-v2/gpt2.onnx.part0`…`part62` into one file, run `uv run --python 3.12 --with onnxruntime --with onnx --with numpy --with tokenizers python tools/quantize-explainer.py <joined.onnx> <outdir>` (per-channel int8 weights, output layer in fp16: 626 → 197 MB, top predictions within a couple of points of the original; the script prints the comparison), split the result into 10 MB pieces named `gpt2.onnx.part0`…`part19` in `static/model-int8/` and delete `static/model-v2/`. Then copy `onnxruntime-web`'s `ort-wasm-simd-threaded*` files to `static/ort/`, KaTeX's `katex.min.css` + `fonts/` to `static/katex/`, the three `Xenova/gpt2` tokenizer files to `static/models/Xenova/gpt2/`, then `npm install --legacy-peer-deps` and `BASE_PATH=/ai-talk/explainer NODE_ENV=production npm run build` and copy `build/` here as `explainer/`.
+**Rebuilding the Explainer copy:** clone the repo at that commit, apply `tools/explainer-offline.patch` (local ONNX runtime, local tokenizer, local KaTeX CSS, no Google Fonts, no YouTube embed, configurable base path, Vite bumped to match its Svelte plugin, model read from `model-int8/` in 20 chunks). Shrink the model: join `static/model-v2/gpt2.onnx.part0`…`part62` into one file, run `uv run --python 3.12 --with onnxruntime --with onnx --with numpy --with tokenizers python tools/quantize-explainer.py <joined.onnx> <outdir>` (per-channel int8 weights, output layer in fp16: 626 → 197 MB, top predictions within a couple of points of the original; the script prints the comparison), split the result into 10 MB pieces named `gpt2.onnx.part0`…`part19` in `static/model-int8/` and delete `static/model-v2/`. Then copy `onnxruntime-web`'s `ort-wasm-simd-threaded*` files to `static/ort/`, KaTeX's `katex.min.css` + `fonts/` to `static/katex/`, the three `Xenova/gpt2` tokenizer files to `static/models/Xenova/gpt2/`, then `npm install --legacy-peer-deps` and `BASE_PATH=/explainer NODE_ENV=production npm run build` and copy `build/` here as `explainer/`.
 
 ## Check it
 
 ```bash
 cd tools && npm install && cd ..
-node tools/verify.mjs shots 1920 1080 walk          # DECK_URL=https://brenorb.github.io/ai-talk/ to check the live site
+node tools/verify.mjs shots 1920 1080 walk          # DECK_URL=https://ai-intro.brenorb.com/ to check the live site
 ```
 
 With the server running, this drives headless Chrome through the whole deck with real key presses, **blocks every non-local network request**, screenshots every step into `shots/`, and prints a report (console errors, failed or blocked requests, navigation mismatches). `jump` instead of `walk` is faster (instant jumps, no transitions). `uv run --with pillow python tools/sheets.py shots` builds contact sheets (the last run's sheets and report are in `shots/`).

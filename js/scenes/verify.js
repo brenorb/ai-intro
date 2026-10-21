@@ -1,40 +1,36 @@
-// Scene "verify": is your work AI-verifiable? A top-down flowchart (terminal, decisions as diamonds,
-// steps as boxes, right-angle connectors) that builds one branch per step.
-// Steps: 0 start + the question · 1 yes: verifiable, let it run · 2 maybe: build a judge, test it · 3 no: you're the judge
+// Scene "verify": is your work AI-verifiable? A top-down flowchart (decisions as diamonds, steps as
+// boxes, outcomes as pills, right-angle connectors) that builds one branch per step.
+// Steps: 0 the question · 1 yes: verifiable, let it run · 2 maybe: build a judge, test it · 3 no: you're the judge
 import { gsap, h, s, svgRoot, C, mover } from '../lib.js';
 
 // shapes: [kind, cx, cy, w, h, html, colour]
 const NODES = {
-  start: ['pill', 960, 262, 600, 62, 'Start: a task you want to hand to AI', C.ink],
-  q: ['diamond', 960, 420, 600, 190, 'Can AI or a test tell<br>if the result is good?', C.ink],
-  judge: ['box', 960, 592, 380, 70, 'Build an AI judge', C.ai],
-  eval: ['box', 960, 700, 600, 76, 'Test it on work you already graded', C.ai],
-  q2: ['diamond', 960, 862, 430, 160, 'Is the judge<br>good enough?', C.ink],
-  ver: ['box', 330, 690, 400, 90, 'You have verifiable work', C.ok],
-  verEnd: ['pill', 330, 905, 470, 116, 'Let it run: close the loop, delegate, get out of the way', C.ok],
-  me: ['box', 1590, 690, 400, 90, 'You’re the judge', C.gold],
-  meEnd: ['pill', 1590, 905, 520, 116, 'AI as a helper: one or two tasks at a time, protect your focus', C.gold],
+  q: ['diamond', 960, 345, 620, 200, 'Can AI or a test tell<br>if the result is good?', C.ink],
+  judge: ['box', 960, 540, 380, 70, 'Build an AI judge', C.ai],
+  q2: ['diamond', 960, 740, 640, 230, 'Build an eval to test<br>your judge. Is it<br>good enough?', C.ink],
+  ver: ['box', 330, 740, 400, 90, 'You have verifiable work', C.ok],
+  verEnd: ['pill', 330, 935, 470, 116, 'Let it run: close the loop, delegate, get out of the way', C.ok],
+  me: ['box', 1590, 740, 400, 90, 'You’re the judge', C.gold],
+  meEnd: ['pill', 1590, 935, 520, 116, 'AI as a helper: one or two tasks at a time, protect your focus', C.gold],
 };
 // connectors as right-angle polylines; label position
 const EDGES = {
-  startQ: [[[960, 293], [960, 325]]],
-  yes: [[[660, 420], [330, 420], [330, 645]], 'Yes', 495, 404],
-  maybe: [[[960, 515], [960, 557]], 'Maybe', 1030, 545],
-  no: [[[1260, 420], [1590, 420], [1590, 645]], 'No', 1425, 404],
-  judgeEval: [[[960, 627], [960, 662]]],
-  evalQ2: [[[960, 738], [960, 782]]],
-  q2Yes: [[[745, 862], [620, 862], [620, 690], [530, 690]], 'Yes', 690, 846],
-  q2No: [[[1175, 862], [1300, 862], [1300, 690], [1390, 690]], 'No', 1230, 846],
-  verEnd: [[[330, 735], [330, 847]]],
-  meEnd: [[[1590, 735], [1590, 847]]],
+  yes: [[[650, 345], [330, 345], [330, 695]], 'Yes', 490, 329],
+  maybe: [[[960, 445], [960, 505]], 'Maybe', 1030, 485],
+  no: [[[1270, 345], [1590, 345], [1590, 695]], 'No', 1430, 329],
+  judgeQ2: [[[960, 575], [960, 625]]],
+  q2Yes: [[[640, 740], [530, 740]], 'Yes', 585, 724],
+  q2No: [[[1280, 740], [1390, 740]], 'No', 1335, 724],
+  verEnd: [[[330, 785], [330, 877]]],
+  meEnd: [[[1590, 785], [1590, 877]]],
 };
 const STEP = [
-  { nodes: ['start', 'q'], edges: ['startQ'] },
+  { nodes: ['q'], edges: [] },
   { nodes: ['ver', 'verEnd'], edges: ['yes', 'verEnd'] },
-  { nodes: ['judge', 'eval', 'q2'], edges: ['maybe', 'judgeEval', 'evalQ2', 'q2Yes'] },
+  { nodes: ['judge', 'q2'], edges: ['maybe', 'judgeQ2', 'q2Yes'] },
   { nodes: ['me', 'meEnd'], edges: ['no', 'meEnd', 'q2No'] },
 ];
-const RUN = [[], ['yes', 'verEnd'], ['maybe', 'judgeEval', 'evalQ2', 'q2Yes'], ['no', 'meEnd']];
+const RUN = [[], ['yes', 'verEnd'], ['maybe', 'judgeQ2', 'q2Yes'], ['no', 'meEnd']];
 
 export default function create(root) {
   const svg = svgRoot(root);
@@ -78,7 +74,7 @@ export default function create(root) {
     const freshNodes = STEP[step].nodes, freshEdges = STEP[step].edges;
     // new pieces appear in the order the eye follows them: edge, node, edge, node…
     let order = [];
-    if (step === 0) order = [['n', 'start'], ['e', 'startQ'], ['n', 'q']];
+    if (step === 0) order = [['n', 'q']];
     else {
       RUN[step].forEach((e, i) => { order.push(['e', e]); if (freshNodes[i]) order.push(['n', freshNodes[i]]); });
       freshNodes.slice(RUN[step].length).forEach((n) => order.push(['n', n]));

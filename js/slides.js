@@ -259,7 +259,7 @@ CLICK — the rule to take home: nothing it says becomes fact until something ha
     captions: [
       { kicker: 'Before you delegate', h: 'Is your work AI-verifiable?', sub: '' },
       { sub: 'Tests, a compiler, numbers you can recompute: the loop closes by itself.' },
-      { sub: 'Not sure? Build a judge, and check the judge before you trust it.' },
+      { sub: 'Not sure? Build an AI judge, and test it with an eval before you trust it.' },
       { sub: 'If only you can tell, AI helps you work. It does not replace your judgement.' },
     ],
     notes: `How much to hand over depends on one question: can something other than you tell whether the result is good?

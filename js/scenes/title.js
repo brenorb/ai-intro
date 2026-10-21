@@ -1,5 +1,5 @@
 // Scene "title": a slow drifting field of connected nodes behind the title and the closing slide.
-import { gsap, h, rng, W, H } from '../lib.js';
+import { gsap, h, rng, mover, W, H } from '../lib.js';
 
 export default function create(root) {
   const cv = h('canvas', { class: 'full', width: W, height: H }, root);
@@ -30,11 +30,18 @@ export default function create(root) {
     ctx.fillStyle = grad; ctx.fillRect(0, 0, W, H);
   }
   gsap.ticker.add(tick);
+  // closing call to action: a link to the projects page
+  const cta = h('a', {
+    href: 'https://brenorb.com/projects/', target: '_blank', rel: 'noopener',
+    style: 'position:absolute;left:50%;top:790px;transform:translateX(-50%);display:inline-flex;align-items:center;gap:16px;padding:20px 34px;border-radius:999px;border:2px solid var(--bio);background:rgba(255,176,87,.08);color:var(--ink);text-decoration:none;font:500 32px var(--sans);white-space:nowrap;visibility:hidden;opacity:0',
+    html: 'See what I’m building <b style="color:var(--bio);font-weight:600">brenorb.com/projects</b> <span style="color:var(--bio)">→</span>',
+  }, root);
   const tone = { v: 0 };
   return {
     update({ state, instant }) {
       on = true; last = performance.now() / 1000;
       gsap.to(tone, { v: state === 'close' ? 1 : 0, duration: instant ? 0 : 1.2, onUpdate: () => { warm = tone.v; } });
+      mover(instant)(cta, { autoAlpha: state === 'close' ? 1 : 0, y: state === 'close' ? 0 : 16, duration: 0.7, delay: state === 'close' && !instant ? 0.9 : 0 });
     },
     exit() { on = false; },
   };

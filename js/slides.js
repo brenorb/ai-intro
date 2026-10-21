@@ -12,8 +12,9 @@ import explainer from './scenes/explainer.js';
 import agent from './scenes/agent.js';
 import loop from './scenes/loop.js';
 import why from './scenes/why.js';
+import verify from './scenes/verify.js';
 
-export const SCENES = { title, about, neuron, training, sampling, tokens, attention, context, explainer, agent, loop, why };
+export const SCENES = { title, about, neuron, training, sampling, tokens, attention, context, explainer, agent, loop, why, verify };
 
 export const PARTS = ['', 'Part 1 · What’s inside the machine', 'Part 2 · From model to agent', 'Part 3 · “Why did it do that?”', ''];
 
@@ -252,6 +253,22 @@ CLICK — curate instead: the goal and what done means, the house rules, the two
 CLICK — close the loop. Give it a goal it can check and the means to check it: "make the tests pass", "it must compile", "the page must render — take a screenshot". Now the agent acts, checks, reads the real output, fixes, repeats — and stops when the check passes. And the evidence is attached.
 
 CLICK — the rule to take home: nothing it says becomes fact until something happens. And there are many ways to make something happen — pick whichever your task allows. Even for non-code work: "check every number in this summary against the source and list any that don't match".`,
+  },
+  {
+    id: 'verifiable', scene: 'verify', state: 'verify', steps: 4, part: 2, title: 'Is your work AI-verifiable?', time: 1.2, layout: 'compact',
+    captions: [
+      { kicker: 'Before you delegate', h: 'Is your work AI-verifiable?', sub: '' },
+      { sub: 'Tests, a compiler, numbers you can recompute: the loop closes by itself.' },
+      { sub: 'Not sure? Build a judge, and check the judge before you trust it.' },
+      { sub: 'If only you can tell, AI helps you work. It does not replace your judgement.' },
+    ],
+    notes: `How much to hand over depends on one question: can something other than you tell whether the result is good?
+
+CLICK — yes: tests pass or fail, the code compiles, the numbers can be recomputed. That's verifiable work. Close the loop, delegate as much as you can and get out of the way.
+
+CLICK — maybe: build an AI judge, a second model with a clear rubric. But a judge is also a plausibility engine, so test it first: run it on work you already graded yourself (an eval). If it agrees with you often enough, you have verifiable work. If not, you're the judge.
+
+CLICK — no: taste, strategy, anything only you can evaluate. Then use AI as a helper, the old way: one or two tasks at a time, remove bottlenecks, protect your focus. Running ten agents you can't check just produces ten piles to review.`,
   },
   // ------------------------------------------------------------------ Part 3
   {

@@ -54,7 +54,7 @@
 #caption.quote.big::after { margin-top: 40px; }
 
 /* title and close: emergency-card look */
-#caption.center .kicker { background: var(--bio); }
+#caption.center .kicker { background: var(--bio); color: #050302; }
 #caption.center .headline { font-size: 136px; }
 #caption.center .sub { color: #ffd9b0; }
 

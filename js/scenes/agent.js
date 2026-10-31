@@ -22,6 +22,7 @@ export default function create(root) {
   const youMsg = node('', { left: '0', top: '0', 'max-width': '560px', font: '400 28px/1.3 var(--sans)', padding: '14px 20px', 'border-radius': '18px', background: '#2b2118', border: '1px solid #5a4024', color: '#ffe6c7' });
   const aiMsg = node('', { left: '0', top: '0', 'max-width': '560px', font: '400 28px/1.3 var(--sans)', padding: '14px 20px', 'border-radius': '18px', background: '#12222b', border: '1px solid #235060', color: '#dff7fd' });
   const logEl = node('', { left: '640px', top: '930px', width: '460px', 'text-align': 'center', font: '500 24px var(--mono)', color: 'var(--gold)', 'white-space': 'nowrap' });
+  const quote = node('<div style="font:italic 400 32px/1.25 var(--serif);color:var(--ink)">“The hottest new programming language is English.”</div><div style="font:500 20px var(--mono);color:var(--faint);margin-top:12px;letter-spacing:.06em">— ANDREJ KARPATHY</div>', { left: '110px', top: '840px', width: '470px' });
   const stepEl = node('', { left: '110px', top: '420px', font: '600 22px var(--mono)', color: 'var(--faint)', 'letter-spacing': '.1em' });
 
   // connectors
@@ -87,6 +88,7 @@ export default function create(root) {
     to([...lines, userLine], { autoAlpha: agent ? 1 : 0, duration: 0.6, delay: agent && !instant ? 1.0 : 0 });
     to(chatTag, { autoAlpha: chat && step === 0 ? 1 : 0 });
     to([logEl, stepEl], { autoAlpha: chat && step === 2 ? 1 : 0 });
+    to(quote, { autoAlpha: agent ? 1 : 0, duration: 0.6, delay: agent && !instant ? 1.2 : 0 });
     if (!(chat && step === 0)) gsap.set([youMsg, aiMsg], { autoAlpha: 0 });
     if (!(chat && step === 2)) gsap.set(dot, { opacity: 0 });
     loops.only(...(chat && step === 0 ? ['chat'] : chat && step === 2 ? ['loop'] : []));

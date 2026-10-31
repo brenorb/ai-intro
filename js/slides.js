@@ -84,7 +84,7 @@ The punchline: "what text comes next" is also just a function — from the text 
       { kicker: 'Two kinds of AI', h: 'Classical AI picks one answer', sub: 'Is this a cat? Yes, 97% sure. Same picture, same answer, every time.' },
       { kicker: 'Two kinds of AI', h: 'Generative AI outputs a distribution', sub: 'For the next token it gives a probability to <em>every</em> token in its vocabulary.' },
       { h: 'Then it rolls dice', sub: 'One token is drawn at random, weighted by probability. It is appended, and the whole thing runs again.' },
-      { h: 'Same prompt, different answers', sub: 'Every token is a draw, and each draw changes everything after it.' },
+      { h: 'Same prompt, different answers', sub: 'Every token is a draw that changes everything after it. That’s why “try again” sometimes works.' },
     ],
     notes: `Classical machine learning: classification. One input, one label, a confidence. Deterministic.
 
@@ -101,7 +101,7 @@ CLICK — so the same prompt gives different answers. And an early draw steers e
       { h: 'Training, step 2: teach it to answer, not just continue', sub: 'The raw model only continues text. A second round on question → answer examples turns it into an assistant.' },
       { h: 'Training, step 3: people rate the answers', sub: 'The model is tuned toward what humans prefer. It learns the things that <em>sound</em> good to us.' },
       { h: 'Training, step 4: practice on tasks a program can check', sub: 'Write code, run the tests, get rewarded only when they pass.' },
-      { h: 'After training, the weights are frozen', sub: 'What you talk to is a snapshot. It stopped reading at its <b>knowledge cutoff</b>.' },
+      { h: 'After training, the weights are frozen', sub: 'It doesn’t learn from your past chats. Anything new or private has to come in through the context window.' },
     ],
     notes: `Four stages produce the weights. Go quickly; each one explains a behaviour we'll meet later.
 
@@ -206,7 +206,7 @@ CLICK — MCP, the Model Context Protocol, is a standard plug for adding tools: 
     id: 'agentsmd', scene: 'context', state: 'agents', steps: 2, part: 2, title: 'AGENTS.md', time: 1.0,
     captions: [
       { kicker: 'Context that survives the session', h: 'AGENTS.md: your standing rules, in a file', sub: 'A plain text file in your project: what it is, how to build it, what never to do.' },
-      { h: 'Loaded at the start of every session', sub: 'The harness puts it in the window before you type anything.' },
+      { h: 'Loaded at the start of every session', sub: 'Write it once. The harness reads it at the start of every session, before you type anything.' },
     ],
     notes: `First tool for getting the right things into the window without retyping them.
 
@@ -246,13 +246,13 @@ CLICK — curate instead: the goal and what done means, the house rules, the two
     captions: [
       { kicker: 'Goals and verification', h: '“Done!” is a sentence, not a status', sub: '' },
       { h: 'Close the loop', sub: 'Give it a goal <em>and a way to check</em>. Then the loop can run until the check passes, and the proof comes with the answer.' },
-      { kicker: 'Ways to close the loop', h: 'Nothing it <em>says</em> becomes fact until something <em>happens</em>', sub: '' },
+      { kicker: 'Ways to close the loop', h: 'Don’t trust. Verify.', sub: '' },
     ],
     notes: `The single most useful habit. An open loop: you ask, it answers "done, tested, all passes". That sentence is generated the same way as everything else — it's a plausible continuation, not a report. Look at what actually ran: nothing.
 
 CLICK — close the loop. Give it a goal it can check and the means to check it: "make the tests pass", "it must compile", "the page must render — take a screenshot". Now the agent acts, checks, reads the real output, fixes, repeats — and stops when the check passes. And the evidence is attached.
 
-CLICK — the rule to take home: nothing it says becomes fact until something happens. And there are many ways to make something happen — pick whichever your task allows. Even for non-code work: "check every number in this summary against the source and list any that don't match".`,
+CLICK — the rule to take home: don't trust, verify. Nothing it says becomes fact until something happens. And there are many ways to make something happen — pick whichever your task allows. Even for non-code work: "check every number in this summary against the source and list any that don't match".`,
   },
   {
     id: 'verifiable', scene: 'verify', state: 'verify', steps: 4, part: 2, title: 'Is your work AI-verifiable?', time: 1.2, layout: 'compact',
@@ -349,7 +349,7 @@ CLICK — it can write differently, but you have to pull it away from the centre
   },
   {
     id: 'close', scene: 'title', state: 'close', part: 4, title: 'Close', time: 0.6, layout: 'center',
-    caption: { kicker: 'To take home', h: 'It predicts. You build the checks.', sub: 'A plausibility engine with a buffer for memory. You control the <em>context</em>, the <em>tools</em> and the <em>loop</em> that checks its work.' },
+    caption: { kicker: 'To take home', h: 'It predicts. You build the checks.', sub: 'Control the <em>context</em>, the <em>tools</em> and the <em>loop</em>.' },
     notes: `Close. Underneath, it's one machine: it predicts plausible next tokens, from frozen weights, looking at a fixed window.
 
 Models will keep getting better. That machine stays. So the skill that lasts isn't magic prompts — it's the three things you control: what's in the context, which tools it has, and the loop that checks its work.

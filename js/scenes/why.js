@@ -9,8 +9,8 @@ import { CHIP_COLORS, showTok } from './tokens.js';
 const FIXES = {
   forgot: ['Context engineering: keep the window small, fresh and relevant', 'Standing rules go in AGENTS.md, not in message 1', 'New topic, new chat; summarize, then restart'],
   rust: ['Say what is unusual: “SimplicityHL, not Rust”', 'Give it docs and examples (a skill)', 'Let the compiler correct it, in the loop'],
-  tested: ['Ask for the evidence: the actual output', 'Let the harness run the check', 'Push back with facts, not with pressure'],
-  strawberry: ['Code: a program does the counting', 'Ask it to write the code and run it', 'Same for sums, dates, sorting, counting'],
+  tested: ['Don’t trust, verify: ask for the actual output', 'Let the harness run the check', 'Push back with facts, not with pressure'],
+  strawberry: ['Don’t ask it to be the calculator. Ask it to write one.', 'Ask it to write the code and run it', 'Same for sums, dates, sorting, counting'],
   injection: ['Give it only the tools the task needs', 'Run it in a sandbox, with guardrails', 'Untrusted input: no dangerous tools', 'You approve anything irreversible'],
   bland: ['Show examples of the voice you want', 'Name the audience and what to avoid', 'Have an adversarial subagent review it for exactly what you don’t want', 'Ask for three different takes'],
 };

@@ -138,7 +138,7 @@ export default function create(root) {
   const mCut = h('div', { class: 'tl-mark', style: 'left:68%;color:#9fd8ff;top:54px', text: 'knowledge cutoff' }, p5);
   const mNow = h('div', { class: 'tl-mark', style: 'left:97%;color:var(--gold);top:54px', text: 'today' }, p5);
   const gapTxt = h('div', { style: 'position:absolute;left:70%;width:26%;top:135px;text-align:center;font:500 26px var(--sans);color:var(--dim)', text: 'never seen' }, p5);
-  h('div', { class: 'lbl', style: 'position:absolute;left:0;top:300px;width:1700px', html: 'It does not learn from your conversations. Anything newer, private or specific to you has to arrive through the <b style="color:var(--ink)">context window</b>.' }, p5);
+  h('div', { class: 'lbl', style: 'position:absolute;left:0;top:300px;width:1700px', html: 'What you talk to is a snapshot. It stopped reading at its <b style="color:var(--ink)">knowledge cutoff</b>.' }, p5);
 
   let shown = -1;
   function update({ step, instant }) {

@@ -128,3 +128,10 @@
 /* the live Transformer Explainer embed sits above the scanlines (they made it look filmed off a TV)
    and a bit lower, clear of the taller themed headline */
 .scene[data-scene="explainer"] > div:first-of-type { z-index: 21; top: 200px !important; height: 800px !important; }
+
+/* keep captions the same height as the original theme: a slimmer tag, and titles get the full width
+   (the Mincho is wider than the original serif, so long titles were wrapping onto the content) */
+#caption .kicker { font-size: 22px; padding: 5px 30px 3px 12px; }
+#caption .headline { font-size: 74px; max-width: 1700px; margin-top: 10px; }
+#caption.compact .headline { font-size: 52px; margin-top: 8px; }
+#caption.quote .headline { max-width: 1700px; }

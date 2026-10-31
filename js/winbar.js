@@ -3,16 +3,16 @@
 import { gsap, h, C } from './lib.js';
 
 export const KIND = {
-  sys: { color: '#c59bff', group: 'System prompt' },
-  inst: { color: '#ffd166', group: 'Your instructions' },
-  you: { color: '#ffb057', group: 'You' },
-  ai: { color: '#5fd4e8', group: 'Model' },
-  tool: { color: '#6fdc8c', group: 'Tool results' },
-  file: { color: '#7c9cff', group: 'Files' },
-  agents: { color: '#ffe08a', group: 'AGENTS.md' },
-  skill: { color: '#ff9d8a', group: 'Skills' },
-  summary: { color: '#f3f1ea', group: 'Summary' },
-  web: { color: '#ff6b6b', group: 'Web page' },
+  sys: { color: '#a46bff', group: 'System prompt' },
+  inst: { color: '#ffbf1a', group: 'Your instructions' },
+  you: { color: '#ff8a1c', group: 'You' },
+  ai: { color: '#3dffa2', group: 'Model' },
+  tool: { color: '#a6ff3a', group: 'Tool results' },
+  file: { color: '#2ee6d6', group: 'Files' },
+  agents: { color: '#ffd23f', group: 'AGENTS.md' },
+  skill: { color: '#ff5a36', group: 'Skills' },
+  summary: { color: '#fff0dc', group: 'Summary' },
+  web: { color: '#ff2a1f', group: 'Web page' },
 };
 
 export function createWinBar(parent, { left = 110, top = 560, width = 1700, height = 150, label = 'Context window', cap = 'fixed size' } = {}) {

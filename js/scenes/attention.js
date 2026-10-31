@@ -19,7 +19,7 @@ export default function create(root) {
   const toks = TOKS.map((t, i) => {
     const w = widths[i], cx = x + w / 2; const g = s('g', {}, svg);
     const rect = s('rect', { x, y: ROW_Y - CH / 2, width: w, height: CH, rx: 12, fill: CHIP_COLORS[i % CHIP_COLORS.length] }, g);
-    s('text', { x: cx, y: ROW_Y + 11, 'text-anchor': 'middle', style: `font: 600 ${FS}px var(--mono); fill: #0a0c12; white-space: pre`, text: showTok(t) }, g);
+    s('text', { x: cx, y: ROW_Y + 11, 'text-anchor': 'middle', style: `font: 600 ${FS}px var(--mono); fill: #050302; white-space: pre`, text: showTok(t) }, g);
     const ring = s('rect', { x: x - 5, y: ROW_Y - CH / 2 - 5, width: w + 10, height: CH + 10, rx: 16, fill: 'none', stroke: C.attn, 'stroke-width': 5, opacity: 0 }, g);
     // mini vector
     const vec = s('g', {}, svg);

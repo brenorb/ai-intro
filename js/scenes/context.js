@@ -59,8 +59,8 @@ export default function create(root) {
       const inside = inWin.includes(c.key);
       Object.assign(c.el.style, {
         height: (inside ? 28 + c.size * 22 : 76) + 'px',
-        borderColor: step === 2 ? (c.good ? '#2d8a5c' : '#2a3347') : inside && step === 1 && !c.good ? '#6a3a3a' : '#2a3347',
-        background: step === 2 && c.good ? '#10201a' : 'var(--panel)',
+        borderColor: step === 2 ? (c.good ? '#5a9a14' : '#5a2c0c') : inside && step === 1 && !c.good ? '#7a1a0c' : '#5a2c0c',
+        background: step === 2 && c.good ? '#0f2004' : 'var(--panel)',
         opacity: step === 2 && !c.good ? '0.35' : '1',
         textDecoration: step === 2 && !c.good ? 'line-through' : 'none',
       });
@@ -69,18 +69,18 @@ export default function create(root) {
   }
 
   // ---- 'files' extras ----
-  const agentsCard = h('div', { class: 'codecard', style: 'position:absolute;left:110px;top:350px;width:640px;height:330px;font-size:23px;border-color:#ffe08a' }, root);
+  const agentsCard = h('div', { class: 'codecard', style: 'position:absolute;left:110px;top:350px;width:640px;height:330px;font-size:23px;border-color:#ffd23f' }, root);
   agentsCard.innerHTML = `<span class="s"># AGENTS.md</span>\n<span class="c">Read at the start of every session.</span>\n\n- This repo is <span class="f">SimplicityHL</span>, not Rust.\n- Check the compiler output before\n  saying something works.\n- Ask before deleting files.\n- Style: small functions, no macros.`;
   const shelf = h('div', { style: 'position:absolute;left:820px;top:350px;width:990px' }, root);
-  h('div', { class: 'note', style: 'color:#ff9d8a;margin-bottom:14px;font-size:20px;letter-spacing:.12em', text: 'SKILLS: INSTRUCTIONS THAT LOAD ONLY WHEN NEEDED' }, shelf);
+  h('div', { class: 'note', style: 'color:#ff5a36;margin-bottom:14px;font-size:20px;letter-spacing:.12em', text: 'SKILLS: INSTRUCTIONS THAT LOAD ONLY WHEN NEEDED' }, shelf);
   const shelfGrid = h('div', { style: 'display:grid;grid-template-columns:repeat(3,1fr);gap:14px' }, shelf);
   const SK = [['simplicity-contracts', 'Write and compile SimplicityHL'], ['pdf-reports', 'Build PDF reports'], ['code-review', 'Our review checklist'], ['brand-voice', 'How we write'], ['deploy', 'Release steps'], ['data-queries', 'Warehouse tables']];
-  const skEls = SK.map(([n, d]) => h('div', { style: 'border:2px solid var(--line);border-radius:14px;background:var(--panel);padding:14px 18px', html: `<div style="font:600 23px var(--mono);color:#ff9d8a">${n}</div><div style="font:400 20px var(--sans);color:var(--dim);margin-top:4px">${d}</div>` }, shelfGrid));
+  const skEls = SK.map(([n, d]) => h('div', { style: 'border:2px solid var(--line);border-radius:14px;background:var(--panel);padding:14px 18px', html: `<div style="font:600 23px var(--mono);color:#ff5a36">${n}</div><div style="font:400 20px var(--sans);color:var(--dim);margin-top:4px">${d}</div>` }, shelfGrid));
   const task = h('div', { class: 'bubble you', style: 'position:absolute;left:820px;top:610px;font-size:28px;margin:0', text: '“Write a contract that checks one signature.”' }, root);
   const aka = h('div', { style: 'position:absolute;left:820px;top:350px;width:990px;font:400 30px/1.4 var(--sans);color:var(--dim)', html: 'Same idea, different names: <b style="color:var(--ink)">CLAUDE.md</b> in Claude Code, <b style="color:var(--ink)">AGENTS.md</b> in Codex and others, <b style="color:var(--ink)">project instructions</b> on claude.ai and ChatGPT.' }, root);
-  const session = h('div', { style: 'position:absolute;left:820px;top:530px;font:600 34px var(--mono);color:#ffe08a' }, root);
+  const session = h('div', { style: 'position:absolute;left:820px;top:530px;font:600 34px var(--mono);color:#ffd23f' }, root);
   const sessionNote = h('div', { style: 'position:absolute;left:820px;top:600px;width:990px;font:400 28px/1.4 var(--sans);color:var(--dim)', html: 'Every new session starts with it. The rule no longer lives in message 1 of an old chat.' }, root);
-  const skillCard = h('div', { class: 'codecard', style: 'position:absolute;left:110px;top:350px;width:640px;height:330px;font-size:23px;border-color:#ff9d8a' }, root);
+  const skillCard = h('div', { class: 'codecard', style: 'position:absolute;left:110px;top:350px;width:640px;height:330px;font-size:23px;border-color:#ff5a36' }, root);
   skillCard.innerHTML = `<span class="s">simplicity-contracts/</span>\n├── <span class="f">SKILL.md</span>   <span class="c">name + one line</span>\n│              <span class="c">+ full instructions</span>\n├── examples/  <span class="c">working contracts</span>\n├── docs/      <span class="c">language reference</span>\n└── scripts/   <span class="c">compile + test</span>`;
   let sessionTl = null;
 
@@ -163,7 +163,7 @@ export default function create(root) {
         to(task, { autoAlpha: step >= 1 ? 1 : 0 });
         if (step === 0) bar.set([sys, ag, ...slivers], opts);
         else bar.set([sys, ag, ...slivers, { key: 'task', kind: 'you', size: 5, label: 'Task' }, { key: 'skfull', kind: 'skill', size: 17, label: 'simplicity-contracts (full)' }], opts);
-        skEls.forEach((e, i) => gsap.to(e, { borderColor: step >= 1 && i === 0 ? '#ff9d8a' : '#2a3347', opacity: step >= 1 && i !== 0 ? 0.4 : 1, scale: step >= 1 && i === 0 ? 1.04 : 1, duration: instant ? 0 : 0.5 }));
+        skEls.forEach((e, i) => gsap.to(e, { borderColor: step >= 1 && i === 0 ? '#ff5a36' : '#5a2c0c', opacity: step >= 1 && i !== 0 ? 0.4 : 1, scale: step >= 1 && i === 0 ? 1.04 : 1, duration: instant ? 0 : 0.5 }));
       }
     }
   }

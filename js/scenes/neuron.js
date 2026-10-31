@@ -20,8 +20,8 @@ export default function create(root) {
   const svg = svgRoot(root);
   const defs = s('defs', {}, svg);
   defs.innerHTML = `
-    <radialGradient id="somaGrad" cx="42%" cy="38%" r="70%"><stop offset="0" stop-color="#ffd9a0"/><stop offset=".55" stop-color="${C.bio}"/><stop offset="1" stop-color="${C.bio2}"/></radialGradient>
-    <radialGradient id="nodeGrad" cx="40%" cy="35%" r="75%"><stop offset="0" stop-color="#bff3ff"/><stop offset="1" stop-color="${C.ai}"/></radialGradient>
+    <radialGradient id="somaGrad" cx="42%" cy="38%" r="70%"><stop offset="0" stop-color="#ffc98a"/><stop offset=".55" stop-color="${C.bio}"/><stop offset="1" stop-color="${C.bio2}"/></radialGradient>
+    <radialGradient id="nodeGrad" cx="40%" cy="35%" r="75%"><stop offset="0" stop-color="#b8ffdb"/><stop offset="1" stop-color="${C.ai}"/></radialGradient>
     <clipPath id="clipL"><rect x="0" y="340" width="952" height="700"/></clipPath>
     <clipPath id="clipR"><rect x="968" y="340" width="952" height="700"/></clipPath>
     <filter id="soft" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="6"/></filter>`;
@@ -65,7 +65,7 @@ export default function create(root) {
     m.glow = s('circle', { r: MINI_R * 2.6, fill: C.bio, opacity: 0, filter: 'url(#soft)' }, g);
     s('circle', { r: MINI_R, fill: 'url(#somaGrad)' }, g);
   }
-  const meshPulses = Array.from({ length: 70 }, () => ({ el: s('circle', { r: 3.4, fill: '#fff3df', opacity: 0 }, meshPulseG), e: null, t: 0, dur: 1 }));
+  const meshPulses = Array.from({ length: 70 }, () => ({ el: s('circle', { r: 3.4, fill: '#fff1d8', opacity: 0 }, meshPulseG), e: null, t: 0, dur: 1 }));
 
   // =====================================================================
   // LEFT DETAIL: one biological neuron
@@ -102,7 +102,7 @@ export default function create(root) {
   });
   const axonPts = [[BIO.x + BIO.r - 4, BIO.y], [540, 700], [640, 682], [740, 696], [836, 690]];
   const axon = s('path', { d: spline(axonPts), fill: 'none', stroke: C.bio, 'stroke-width': 7, 'stroke-linecap': 'round' }, bioInner);
-  s('path', { d: spline(axonPts), fill: 'none', stroke: '#ffd49a', 'stroke-opacity': 0.42, 'stroke-width': 26, 'stroke-linecap': 'round', 'stroke-dasharray': '50 34', 'stroke-dashoffset': -44 }, bioInner);
+  s('path', { d: spline(axonPts), fill: 'none', stroke: '#ffb466', 'stroke-opacity': 0.42, 'stroke-width': 26, 'stroke-linecap': 'round', 'stroke-dasharray': '50 34', 'stroke-dashoffset': -44 }, bioInner);
   const bulbs = [];
   [[916, 610], [934, 664], [934, 716], [914, 770]].forEach(([tx, ty]) => {
     s('path', { d: spline([[836, 690], [(836 + tx) / 2 + 6, (690 + ty) / 2 + (ty < 690 ? 8 : -8)], [tx, ty]]), fill: 'none', stroke: C.bio, 'stroke-width': 4, 'stroke-linecap': 'round' }, bioInner);
@@ -112,9 +112,9 @@ export default function create(root) {
   // hillock + soma
   s('path', { d: `M${BIO.x + 30},${BIO.y - 44} Q${BIO.x + 78},${BIO.y - 10} ${BIO.x + 96},${BIO.y} Q${BIO.x + 78},${BIO.y + 10} ${BIO.x + 30},${BIO.y + 44}Z`, fill: C.bio }, bioInner);
   const soma = s('circle', { cx: BIO.x, cy: BIO.y, r: BIO.r, fill: 'url(#somaGrad)' }, bioInner);
-  s('circle', { cx: BIO.x - 8, cy: BIO.y - 4, r: 22, fill: '#b5532f', opacity: 0.55 }, bioInner);
-  const dendPulses = trunks.map(() => s('circle', { r: 9, fill: '#fff6e6', class: 'glow-bio', opacity: 0 }, bioInner));
-  const spike = s('circle', { r: 12, fill: '#fff6e6', class: 'glow-bio', opacity: 0 }, bioInner);
+  s('circle', { cx: BIO.x - 8, cy: BIO.y - 4, r: 22, fill: '#a8360c', opacity: 0.55 }, bioInner);
+  const dendPulses = trunks.map(() => s('circle', { r: 9, fill: '#fff1d8', class: 'glow-bio', opacity: 0 }, bioInner));
+  const spike = s('circle', { r: 12, fill: '#fff1d8', class: 'glow-bio', opacity: 0 }, bioInner);
 
   // =====================================================================
   // RIGHT WORLD: feed-forward network
@@ -135,7 +135,7 @@ export default function create(root) {
     s('circle', { cx: n.x, cy: n.y, r: NET.r, fill: C.bg, stroke: C.ai, 'stroke-width': 2 }, netNodesG);
     n.fill = s('circle', { cx: n.x, cy: n.y, r: NET.r - 1, fill: 'url(#nodeGrad)', opacity: 0.15 }, netNodesG);
   }
-  const netPulses = Array.from({ length: 90 }, () => ({ el: s('circle', { r: 3, fill: '#e8fbff', opacity: 0 }, netPulseG), e: null, t0: 0 }));
+  const netPulses = Array.from({ length: 90 }, () => ({ el: s('circle', { r: 3, fill: '#e2ffef', opacity: 0 }, netPulseG), e: null, t0: 0 }));
 
   // =====================================================================
   // RIGHT DETAIL: one artificial neuron
@@ -176,15 +176,15 @@ export default function create(root) {
   const outFill = s('circle', { cx: OUT.x, cy: OUT.y, r: OUT.r, fill: 'url(#nodeGrad)', opacity: 0.2 }, aiInner);
   s('circle', { cx: OUT.x, cy: OUT.y, r: OUT.r, fill: 'none', stroke: C.ai, 'stroke-width': 3 }, aiInner);
   const outVal = s('text', { class: 't-num', x: OUT.x, y: OUT.y + 8, 'text-anchor': 'middle', text: '' }, aiInner);
-  outVal.style.fill = '#06222a';
+  outVal.style.fill = '#02160b';
   const chips = ins.map(() => {
     const g = s('g', { opacity: 0 }, aiInner);
-    s('circle', { r: 9, fill: '#eafcff', class: 'glow-ai' }, g);
+    s('circle', { r: 9, fill: '#e2ffef', class: 'glow-ai' }, g);
     const t = s('text', { class: 't-num', y: -18, 'text-anchor': 'middle', text: '' }, g);
     t.style.fontSize = '21px';
     return { g, t };
   });
-  const flowDot = s('circle', { r: 10, fill: '#eafcff', class: 'glow-ai', opacity: 0 }, aiInner);
+  const flowDot = s('circle', { r: 10, fill: '#e2ffef', class: 'glow-ai', opacity: 0 }, aiInner);
 
   // =====================================================================
   // LABELS (step 2 of 'single')
@@ -195,7 +195,7 @@ export default function create(root) {
     const tx = s('text', { class: 't-label', x: anchor === 'start' ? 44 : -44, y: 8, 'text-anchor': anchor, text }, g);
     tx.style.fill = C.ink;
     s('circle', { r: 17, fill: col }, g);
-    s('text', { 'text-anchor': 'middle', y: 7, style: 'font: 700 20px var(--mono); fill: #0a0c12', text: n }, g);
+    s('text', { 'text-anchor': 'middle', y: 7, style: 'font: 700 20px var(--mono); fill: #050302', text: n }, g);
     return g;
   };
   badge(90, 392, '1', 'dendrites: signals come in', C.bio);
@@ -363,7 +363,7 @@ export default function create(root) {
     tl.fromTo(spike, { motionPath: { path: axon, start: 0, end: 0 } }, { motionPath: { path: axon, start: 0, end: 1 }, duration: 0.85, ease: 'power1.inOut', immediateRender: false }, 1.9);
     tl.to(spike, { opacity: 0, duration: 0.1 }, 2.72);
     tl.fromTo(bulbs, { scale: 1 }, { scale: 1.7, transformOrigin: '50% 50%', duration: 0.2, yoyo: true, repeat: 1, stagger: 0.03 }, 2.72);
-    tl.fromTo(bulbs, { fill: C.bio }, { fill: '#fff6e6', duration: 0.2, yoyo: true, repeat: 1, stagger: 0.03 }, 2.72);
+    tl.fromTo(bulbs, { fill: C.bio }, { fill: '#fff1d8', duration: 0.2, yoyo: true, repeat: 1, stagger: 0.03 }, 2.72);
     tl.fromTo(flowDot, { attr: { cx: SUM.x + SUM.r, cy: CY }, opacity: 1 }, { attr: { cx: ACT.x - hs }, duration: 0.3, ease: 'none', immediateRender: false }, 1.9);
     tl.set(flowDot, { opacity: 0 }, 2.2);
     tl.call(() => { gsap.set(actDot, { opacity: 1, attr: { cx: ACT.x - 42 + 84 * clamp((z + 5) / 10, 0, 1), cy: ACT.y + 36 - 72 * y } }); }, null, 2.2);

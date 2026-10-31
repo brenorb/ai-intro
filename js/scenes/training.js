@@ -130,12 +130,12 @@ export default function create(root) {
 
   // ---------- P5: frozen ----------
   const p5 = panels[4];
-  h('div', { class: 'lbl', style: 'position:absolute;left:0;top:30px', html: 'After training the weights are <b style="color:#9fd8ff">frozen</b>.' }, p5);
+  h('div', { class: 'lbl', style: 'position:absolute;left:0;top:30px', html: 'After training the weights are <b style="color:#7ff0ff">frozen</b>.' }, p5);
   const tline = h('div', { class: 'timeline' }, p5);
   const known = h('div', { class: 'known' }, tline);
   const gapEl = h('div', { class: 'gap' }, tline);
-  h('div', { style: 'position:absolute;left:30px;top:135px;font:600 28px var(--sans);color:#dff7fd', text: 'everything it read' }, p5);
-  const mCut = h('div', { class: 'tl-mark', style: 'left:68%;color:#9fd8ff;top:54px', text: 'knowledge cutoff' }, p5);
+  h('div', { style: 'position:absolute;left:30px;top:135px;font:600 28px var(--sans);color:#dcffec', text: 'everything it read' }, p5);
+  const mCut = h('div', { class: 'tl-mark', style: 'left:68%;color:#7ff0ff;top:54px', text: 'knowledge cutoff' }, p5);
   const mNow = h('div', { class: 'tl-mark', style: 'left:97%;color:var(--gold);top:54px', text: 'today' }, p5);
   const gapTxt = h('div', { style: 'position:absolute;left:70%;width:26%;top:135px;text-align:center;font:500 26px var(--sans);color:var(--dim)', text: 'never seen' }, p5);
   h('div', { class: 'lbl', style: 'position:absolute;left:0;top:300px;width:1700px', html: 'What you talk to is a snapshot. It stopped reading at its <b style="color:var(--ink)">knowledge cutoff</b>.' }, p5);

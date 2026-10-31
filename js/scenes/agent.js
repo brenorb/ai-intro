@@ -14,13 +14,13 @@ export default function create(root) {
   const css = (o) => Object.entries(o).map(([k, v]) => `${k}:${v}`).join(';');
   const node = (html, style) => h('div', { html, style: 'position:absolute;' + css(style) }, root);
 
-  const person = node('<div style="font-size:74px;line-height:1">🧑‍💻</div><div style="font:600 24px var(--sans);margin-top:8px;color:var(--bio)">you</div>', { left: '0', top: '0', width: '170px', height: '170px', 'border-radius': '50%', border: '3px solid var(--bio)', background: '#2b2118', display: 'grid', 'place-content': 'center', 'text-align': 'center' });
-  const model = node('<div style="font:500 44px var(--serif)">model</div><div style="font:500 16px var(--mono);color:var(--ai);margin-top:6px;letter-spacing:.06em">TEXT IN → TEXT OUT</div>', { left: '0', top: '0', width: '250px', height: '250px', 'border-radius': '50%', border: '3px solid var(--ai)', background: 'radial-gradient(circle at 40% 35%, #1d4654, #10222b)', display: 'grid', 'place-content': 'center', 'text-align': 'center', 'box-shadow': '0 0 60px rgba(95,212,232,.25)' });
+  const person = node('<div style="font-size:74px;line-height:1">🧑‍💻</div><div style="font:600 24px var(--sans);margin-top:8px;color:var(--bio)">you</div>', { left: '0', top: '0', width: '170px', height: '170px', 'border-radius': '50%', border: '3px solid var(--bio)', background: '#2a1204', display: 'grid', 'place-content': 'center', 'text-align': 'center' });
+  const model = node('<div style="font:500 44px var(--serif)">model</div><div style="font:500 16px var(--mono);color:var(--ai);margin-top:6px;letter-spacing:.06em">TEXT IN → TEXT OUT</div>', { left: '0', top: '0', width: '250px', height: '250px', 'border-radius': '50%', border: '3px solid var(--ai)', background: 'radial-gradient(circle at 40% 35%, #0a4a2a, #03170d)', display: 'grid', 'place-content': 'center', 'text-align': 'center', 'box-shadow': '0 0 60px rgba(61,255,162,.25)' });
   const harness = node('<div style="position:absolute;left:26px;top:-17px;background:var(--bg);padding:2px 14px;font:600 20px var(--mono);letter-spacing:.12em;color:var(--gold)">HARNESS</div><div style="position:absolute;left:0;right:0;bottom:16px;text-align:center;font:500 20px var(--mono);color:var(--faint)">Claude Code · Codex · Cursor</div>', { left: '640px', top: '470px', width: '460px', height: '440px', 'border-radius': '40px', border: '3px dashed var(--gold)' });
   const tools = TOOLS.map(([ic, n, d], i) => node(`<span style="font-size:42px">${ic}</span><span><b style="display:block;font:600 28px var(--sans)">${n}</b><span style="font:400 21px var(--sans);color:var(--dim)">${d}</span></span>`, { left: '1420px', top: `${420 + i * 132}px`, width: '390px', height: '108px', 'border-radius': '20px', border: '2px solid var(--line)', background: 'var(--panel)', display: 'flex', 'align-items': 'center', gap: '20px', padding: '0 24px' }));
   const chatTag = node('claude.ai · ChatGPT in a browser tab', { left: '110px', top: '960px', width: '1700px', 'text-align': 'center', font: '500 22px var(--mono)', color: 'var(--faint)', 'letter-spacing': '.06em' });
-  const youMsg = node('', { left: '0', top: '0', 'max-width': '560px', font: '400 28px/1.3 var(--sans)', padding: '14px 20px', 'border-radius': '18px', background: '#2b2118', border: '1px solid #5a4024', color: '#ffe6c7' });
-  const aiMsg = node('', { left: '0', top: '0', 'max-width': '560px', font: '400 28px/1.3 var(--sans)', padding: '14px 20px', 'border-radius': '18px', background: '#12222b', border: '1px solid #235060', color: '#dff7fd' });
+  const youMsg = node('', { left: '0', top: '0', 'max-width': '560px', font: '400 28px/1.3 var(--sans)', padding: '14px 20px', 'border-radius': '18px', background: '#2a1204', border: '1px solid #8a3f0c', color: '#ffe2bf' });
+  const aiMsg = node('', { left: '0', top: '0', 'max-width': '560px', font: '400 28px/1.3 var(--sans)', padding: '14px 20px', 'border-radius': '18px', background: '#03170d', border: '1px solid #0f6a3c', color: '#dcffec' });
   const logEl = node('', { left: '640px', top: '930px', width: '460px', 'text-align': 'center', font: '500 24px var(--mono)', color: 'var(--gold)', 'white-space': 'nowrap' });
   const quote = node('<div style="font:italic 400 32px/1.25 var(--serif);color:var(--ink)">“The hottest new programming language is English.”</div><div style="font:500 20px var(--mono);color:var(--faint);margin-top:12px;letter-spacing:.06em">— ANDREJ KARPATHY</div>', { left: '110px', top: '840px', width: '470px' });
   const stepEl = node('', { left: '110px', top: '420px', font: '600 22px var(--mono)', color: 'var(--faint)', 'letter-spacing': '.1em' });
@@ -42,7 +42,7 @@ export default function create(root) {
   const mcp = h('div', { style: 'position:absolute;left:0;top:336px;width:1700px' }, tw);
   h('div', { style: 'font:600 22px var(--mono);letter-spacing:.12em;color:var(--attn);margin-bottom:16px', text: 'MCP · A STANDARD PLUG FOR ADDING TOOLS' }, mcp);
   const plugs = h('div', { style: 'display:grid;grid-template-columns:repeat(6,1fr);gap:16px' }, mcp);
-  const plugEls = [['🐙', 'GitHub'], ['📄', 'Google Drive'], ['💬', 'Slack'], ['🗄️', 'Databases'], ['🌐', 'A browser'], ['🔧', 'Your own API']].map(([ic, n]) => h('div', { style: 'border:2px solid var(--attn);border-radius:18px;background:#1b1626;padding:20px 10px;text-align:center', html: `<div style="font-size:46px">${ic}</div><div style="font:600 25px var(--sans);margin-top:8px">${n}</div>` }, plugs));
+  const plugEls = [['🐙', 'GitHub'], ['📄', 'Google Drive'], ['💬', 'Slack'], ['🗄️', 'Databases'], ['🌐', 'A browser'], ['🔧', 'Your own API']].map(([ic, n]) => h('div', { style: 'border:2px solid var(--attn);border-radius:18px;background:#170a24;padding:20px 10px;text-align:center', html: `<div style="font-size:46px">${ic}</div><div style="font:600 25px var(--sans);margin-top:8px">${n}</div>` }, plugs));
   h('div', { class: 'lbl', style: 'margin-top:26px;font-size:30px', html: 'Each connector gives the model new things it can <i>do</i>. More reach means more to supervise.' }, mcp);
 
   const loops = new Loops();
@@ -60,18 +60,18 @@ export default function create(root) {
   });
   loops.add('loop', () => {
     const tl = gsap.timeline({ repeat: -1, repeatDelay: 1.2 });
-    tl.call(() => { logEl.textContent = ''; stepEl.textContent = ''; tools.forEach((t) => gsap.set(t, { borderColor: '#2a3347' })); });
-    tl.set(dot, { opacity: 1, attr: { fill: '#ffe6c7' } });
+    tl.call(() => { logEl.textContent = ''; stepEl.textContent = ''; tools.forEach((t) => gsap.set(t, { borderColor: '#5a2c0c' })); });
+    tl.set(dot, { opacity: 1, attr: { fill: '#ffe2bf' } });
     tl.fromTo(dot, { motionPath: { path: userLine, start: 0, end: 0 } }, { motionPath: { path: userLine, start: 0, end: 1 }, duration: 0.6, ease: 'power1.inOut', immediateRender: false });
     LOG.forEach(([ti, text], i) => {
-      tl.call(() => { logEl.textContent = text; stepEl.textContent = `LOOP ${i + 1} · THINK → ACT → OBSERVE`; gsap.to(tools, { borderColor: '#2a3347', duration: 0.2 }); gsap.to(tools[ti], { borderColor: C.ai, duration: 0.2 }); });
+      tl.call(() => { logEl.textContent = text; stepEl.textContent = `LOOP ${i + 1} · THINK → ACT → OBSERVE`; gsap.to(tools, { borderColor: '#5a2c0c', duration: 0.2 }); gsap.to(tools[ti], { borderColor: C.ai, duration: 0.2 }); });
       tl.set(dot, { attr: { fill: '#fff' } });
       tl.fromTo(dot, { motionPath: { path: lines[ti], start: 0, end: 0 } }, { motionPath: { path: lines[ti], start: 0, end: 1 }, duration: 0.45, ease: 'power1.inOut', immediateRender: false });
       tl.to(tools[ti], { scale: 1.05, duration: 0.12, yoyo: true, repeat: 1 });
       tl.to(dot, { motionPath: { path: lines[ti], start: 1, end: 0 }, duration: 0.45, ease: 'power1.inOut' });
       tl.fromTo(model, { scale: 1 }, { scale: 1.04, duration: 0.12, yoyo: true, repeat: 1 });
     });
-    tl.call(() => { logEl.textContent = '“Done. Here is the diff and the test output.”'; stepEl.textContent = '7 LOOPS, NO HUMAN IN BETWEEN'; gsap.to(tools, { borderColor: '#2a3347', duration: 0.2 }); });
+    tl.call(() => { logEl.textContent = '“Done. Here is the diff and the test output.”'; stepEl.textContent = '7 LOOPS, NO HUMAN IN BETWEEN'; gsap.to(tools, { borderColor: '#5a2c0c', duration: 0.2 }); });
     tl.to(dot, { motionPath: { path: userLine, start: 1, end: 0 }, duration: 0.6, ease: 'power1.inOut' });
     tl.set(dot, { opacity: 0 });
     return tl;

@@ -26,14 +26,14 @@ export default function create(root) {
     }
     // keep the middle readable
     const grad = ctx.createRadialGradient(W / 2, H * 0.47, 120, W / 2, H * 0.47, 900);
-    grad.addColorStop(0, 'rgba(10,12,18,.92)'); grad.addColorStop(1, 'rgba(10,12,18,0)');
+    grad.addColorStop(0, 'rgba(5,3,2,.92)'); grad.addColorStop(1, 'rgba(5,3,2,0)');
     ctx.fillStyle = grad; ctx.fillRect(0, 0, W, H);
   }
   gsap.ticker.add(tick);
   // closing call to action: a link to the projects page
   const cta = h('a', {
     href: 'https://brenorb.com/projects/', target: '_blank', rel: 'noopener',
-    style: 'position:absolute;left:50%;top:790px;transform:translateX(-50%);display:inline-flex;align-items:center;gap:16px;padding:20px 34px;border-radius:999px;border:2px solid var(--bio);background:rgba(255,176,87,.08);color:var(--ink);text-decoration:none;font:500 32px var(--sans);white-space:nowrap;visibility:hidden;opacity:0',
+    style: 'position:absolute;left:50%;top:790px;transform:translateX(-50%);display:inline-flex;align-items:center;gap:16px;padding:20px 34px;border-radius:999px;border:2px solid var(--bio);background:rgba(255,138,28,.08);color:var(--ink);text-decoration:none;font:500 32px var(--sans);white-space:nowrap;visibility:hidden;opacity:0',
     html: 'See what I’m building <b style="color:var(--bio);font-weight:600">brenorb.com/projects</b> <span style="color:var(--bio)">→</span>',
   }, root);
   const tone = { v: 0 };

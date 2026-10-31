@@ -51,7 +51,7 @@ export default function create(root) {
   for (const k in NODES) {
     const [kind, cx, cy, w, hh, html, col] = NODES[k];
     const g = s('g', { opacity: 0 }, nodesG);
-    const fill = col === C.ok ? '#10201a' : col === C.gold ? '#231d10' : col === C.ai ? '#12222b' : C.panel;
+    const fill = col === C.ok ? '#0f2004' : col === C.gold ? '#2a1802' : col === C.ai ? '#03170d' : C.panel;
     if (kind === 'diamond') s('polygon', { points: `${cx},${cy - hh / 2} ${cx + w / 2},${cy} ${cx},${cy + hh / 2} ${cx - w / 2},${cy}`, fill, stroke: col, 'stroke-width': 3, 'stroke-linejoin': 'round' }, g);
     else s('rect', { x: cx - w / 2, y: cy - hh / 2, width: w, height: hh, rx: kind === 'pill' ? hh / 2 : 12, fill, stroke: col, 'stroke-width': 3 }, g);
     const textW = kind === 'diamond' ? w * 0.62 : w - 60;
@@ -63,7 +63,7 @@ export default function create(root) {
     }, root);
     NN[k] = { g, lbl };
   }
-  const pulse = s('circle', { r: 11, fill: '#eafcff', class: 'glow-ai', opacity: 0 }, svg);
+  const pulse = s('circle', { r: 11, fill: '#e2ffef', class: 'glow-ai', opacity: 0 }, svg);
   let tl = null;
 
   function update({ step, instant }) {

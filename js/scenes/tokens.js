@@ -3,7 +3,7 @@
 import { gsap, h, mover } from '../lib.js';
 import { loadTokenizer } from '../tokenizer.js';
 
-export const CHIP_COLORS = ['#7fd8ea', '#ffc27a', '#c9a6ff', '#8fe3a6', '#ff9d8a', '#ffe08a'];
+export const CHIP_COLORS = ['#46f2a0', '#ff9a2e', '#b58cff', '#c6ff4a', '#ff5a36', '#ffd23f'];
 export const showTok = (t) => t.replace(/ /g, '·').replace(/\n/g, '↵');
 const PRESETS = ['strawberry', ' Strawberry', 'strawberries', '1234567', 'Blockstream', 'jet::bip_0340_verify(pk, sig)'];
 const MAX_ROWS = 7;
@@ -37,7 +37,7 @@ export default function create(root) {
       const v = h('span', { class: 'tokvec' }, r);
       if (tk.emb) {
         let html = '';
-        for (const q of tk.emb.vector(t.id)) { const a = Math.min(1, Math.abs(q) / 70); html += `<i style="background:rgba(${q >= 0 ? '95,212,232' : '255,150,90'},${(0.08 + a * 0.92).toFixed(2)})"></i>`; }
+        for (const q of tk.emb.vector(t.id)) { const a = Math.min(1, Math.abs(q) / 70); html += `<i style="background:rgba(${q >= 0 ? '61,255,162' : '255,110,20'},${(0.08 + a * 0.92).toFixed(2)})"></i>`; }
         v.innerHTML = html;
       }
     });

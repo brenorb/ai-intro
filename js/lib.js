@@ -6,8 +6,8 @@ export const W = 1920, H = 1080;
 const SVGNS = 'http://www.w3.org/2000/svg';
 
 export const C = {
-  ink: '#f3f1ea', dim: '#a3aabb', faint: '#626c82', line: '#2a3347', panel: '#151a26', panel2: '#1c2333',
-  bio: '#ffb057', bio2: '#ff7a59', ai: '#5fd4e8', ai2: '#7c9cff', attn: '#c59bff', ok: '#6fdc8c', bad: '#ff6b6b', gold: '#ffd166', bg: '#0a0c12',
+  ink: '#fff0dc', dim: '#e0a46e', faint: '#9a5a28', line: '#5a2c0c', panel: '#0e0804', panel2: '#170d06',
+  bio: '#ff8a1c', bio2: '#ff4a14', ai: '#3dffa2', ai2: '#2ee6d6', attn: '#a46bff', ok: '#a6ff3a', bad: '#ff2a1f', gold: '#ffbf1a', bg: '#050302',
 };
 
 /** Create an SVG element: s('circle', {cx: 1}, parent) */

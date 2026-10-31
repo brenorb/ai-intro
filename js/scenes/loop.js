@@ -10,11 +10,11 @@ export default function create(root) {
 
   // ---------- open loop ----------
   const open = div('', { left: '110px', top: '400px', width: '1700px', height: '600px' });
-  div('“Add the signature check.”', { left: '0', top: '60px', font: '400 32px var(--sans)', padding: '16px 22px', 'border-radius': '20px', background: '#2b2118', border: '1px solid #5a4024', color: '#ffe6c7' }, open);
+  div('“Add the signature check.”', { left: '0', top: '60px', font: '400 32px var(--sans)', padding: '16px 22px', 'border-radius': '20px', background: '#2a1204', border: '1px solid #8a3f0c', color: '#ffe2bf' }, open);
   div('→', { left: '470px', top: '56px', font: '400 54px var(--sans)', color: 'var(--faint)' }, open);
-  div('model', { left: '560px', top: '20px', width: '170px', height: '170px', 'border-radius': '50%', border: '3px solid var(--ai)', background: '#10222b', display: 'grid', 'place-content': 'center', font: '500 34px var(--serif)' }, open);
+  div('model', { left: '560px', top: '20px', width: '170px', height: '170px', 'border-radius': '50%', border: '3px solid var(--ai)', background: '#03170d', display: 'grid', 'place-content': 'center', font: '500 34px var(--serif)' }, open);
   div('→', { left: '760px', top: '56px', font: '400 54px var(--sans)', color: 'var(--faint)' }, open);
-  const claim = div('“Done! I added the check, ran the tests and everything passes. ✅”', { left: '860px', top: '36px', width: '700px', font: '400 34px/1.3 var(--sans)', padding: '20px 26px', 'border-radius': '22px', background: '#12222b', border: '2px solid #235060', color: '#dff7fd' }, open);
+  const claim = div('“Done! I added the check, ran the tests and everything passes. ✅”', { left: '860px', top: '36px', width: '700px', font: '400 34px/1.3 var(--sans)', padding: '20px 26px', 'border-radius': '22px', background: '#03170d', border: '2px solid #0f6a3c', color: '#dcffec' }, open);
   const audit = div('<div style="font:600 20px var(--mono);letter-spacing:.12em;color:var(--faint);margin-bottom:10px">WHAT ACTUALLY HAPPENED</div><div class="codecard" style="font-size:26px;border-color:var(--bad)">files edited:   1\ntests run:      <span class="bad">0</span>\ncommands run:   <span class="bad">0</span></div>', { left: '860px', top: '250px', width: '520px' }, open);
   const stamp = div('a claim, not a result', { left: '1410px', top: '300px', 'white-space': 'nowrap', font: '600 30px var(--serif)', color: 'var(--bad)', transform: 'rotate(-6deg)', border: '3px solid var(--bad)', padding: '8px 18px', 'border-radius': '12px' }, open);
   div('Sounding finished and being finished are generated the same way: as text.', { left: '0', top: '470px', width: '1700px', font: '400 30px var(--sans)', color: 'var(--dim)' }, open);
@@ -38,7 +38,7 @@ export default function create(root) {
   const logBox = div('', { left: '960px', top: '430px', width: '850px' });
   div('WHAT ACTUALLY HAPPENED', { left: '0', top: '0', font: '600 20px var(--mono)', 'letter-spacing': '.12em', color: 'var(--faint)' }, logBox);
   const logCard = h('div', { class: 'codecard', style: 'position:absolute;left:0;top:36px;width:850px;height:250px;font-size:27px;border-color:var(--ok)' }, logBox);
-  const finalMsg = div('“Done. 3 runs; the last one passes. Output attached.”', { left: '0', top: '320px', width: '850px', font: '400 32px/1.3 var(--sans)', padding: '18px 24px', 'border-radius': '22px', background: '#10201a', border: '2px solid #2d5a45', color: '#e4f7ea' }, logBox);
+  const finalMsg = div('“Done. 3 runs; the last one passes. Output attached.”', { left: '0', top: '320px', width: '850px', font: '400 32px/1.3 var(--sans)', padding: '18px 24px', 'border-radius': '22px', background: '#0f2004', border: '2px solid #4a7a10', color: '#efffd9' }, logBox);
   const RUNS = ['run 1   <span class="bad">✗ 3 failing</span>', 'run 2   <span class="bad">✗ 1 failing</span>', 'run 3   <span class="ok">✓ 12 passed</span>'];
 
   // ---------- ways to close the loop ----------

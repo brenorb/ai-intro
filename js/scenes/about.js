@@ -16,7 +16,7 @@ export default function create(root) {
   const svg = svgRoot(root);
   const line = s('line', { x1: X0, y1: Y, x2: X0 + DX * (STEPS.length - 1), y2: Y, stroke: C.line, 'stroke-width': 4, 'stroke-linecap': 'round' }, svg);
   const lit = s('line', { x1: X0, y1: Y, x2: X0, y2: Y, stroke: C.ai, 'stroke-width': 4, 'stroke-linecap': 'round' }, svg);
-  const pulse = s('circle', { cx: X0, cy: Y, r: 11, fill: '#eafcff', class: 'glow-ai', opacity: 0 }, svg);
+  const pulse = s('circle', { cx: X0, cy: Y, r: 11, fill: '#e2ffef', class: 'glow-ai', opacity: 0 }, svg);
   const nodes = STEPS.map((_, i) => s('circle', { cx: X0 + DX * i, cy: Y, r: 13, fill: C.bg, stroke: C.faint, 'stroke-width': 3 }, svg));
   const labels = STEPS.map(([tag, text], i) => {
     const up = i % 2 === 0;
@@ -26,8 +26,8 @@ export default function create(root) {
     }, root);
   });
 
-  const photo = h('div', { style: 'position:absolute;left:110px;top:510px;width:250px;height:250px;border-radius:50%;padding:5px;background:conic-gradient(from 200deg,#5fd4e8,#7c9cff,#ffb057,#5fd4e8)' }, root);
-  const inner = h('div', { style: 'width:100%;height:100%;border-radius:50%;background:#10141d;display:grid;place-items:center;overflow:hidden;font:500 92px var(--serif);color:var(--ink)', text: 'BB' }, photo);
+  const photo = h('div', { style: 'position:absolute;left:110px;top:510px;width:250px;height:250px;border-radius:50%;padding:5px;background:conic-gradient(from 200deg,#3dffa2,#2ee6d6,#ff8a1c,#3dffa2)' }, root);
+  const inner = h('div', { style: 'width:100%;height:100%;border-radius:50%;background:#080503;display:grid;place-items:center;overflow:hidden;font:500 92px var(--serif);color:var(--ink)', text: 'BB' }, photo);
   const img = new Image();
   img.onload = () => { inner.textContent = ''; Object.assign(img.style, { width: '100%', height: '100%', objectFit: 'cover' }); inner.appendChild(img); };
 

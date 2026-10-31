@@ -97,7 +97,7 @@ CLICK — so the same prompt gives different answers. And an early draw steers e
   {
     id: 'training', scene: 'training', state: 'pipeline', steps: 5, part: 1, title: 'The training pipeline', time: 2.0, layout: 'compact',
     captions: [
-      { kicker: 'How the weights get their values', h: 'Training, step 1: read the internet, guess the next token', sub: 'Billions of times: guess, compare with what was really written, nudge the weights. The score being pushed down is called <b>perplexity</b>.' },
+      { kicker: 'How the weights get their values', h: 'Training, step 1: read the internet, guess the next token', sub: 'Guess the next word, compare with what was really written, adjust the weights. Repeat trillions of times. It’s rewarded for not being surprised (low <b>perplexity</b>), not for being right.' },
       { h: 'Training, step 2: teach it to answer, not just continue', sub: 'The raw model only continues text. A second round on question → answer examples turns it into an assistant.' },
       { h: 'Training, step 3: people rate the answers', sub: 'The model is tuned toward what humans prefer. It learns the things that <em>sound</em> good to us.' },
       { h: 'Training, step 4: practice on tasks a program can check', sub: 'Write code, run the tests, get rewarded only when they pass.' },

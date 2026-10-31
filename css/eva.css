@@ -114,16 +114,6 @@
 .hud-time span { font-size: 15px; }
 .hud-en { font-size: 16px; }
 
-/* quote marks belong to the squeezed headline span, not to separate lines */
-#caption.quote .headline::before, #caption.quote .headline::after { content: none; }
-#caption.quote .hx::before { content: "“"; color: var(--bad); }
-#caption.quote .hx::after { content: "”"; color: var(--bad); }
-#caption.quote:not(.big) .headline { font-size: 64px; }
-
-/* HUD text a touch larger for projectors */
-.hud-time span { font-size: 15px; }
-.hud-en { font-size: 16px; }
-
 /* title / close backdrop */
 .eva-band { position: absolute; left: 0; right: 0; height: 34px; background: var(--stripes); background-size: 51px 51px; opacity: .9; animation: eva-band 3s linear infinite; }
 .eva-band::before, .eva-band::after { content: ""; position: absolute; left: 0; right: 0; height: 3px; background: var(--bio); }

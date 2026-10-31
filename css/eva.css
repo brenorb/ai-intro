@@ -1,0 +1,135 @@
+/* Evangelion theme: heavy compressed Mincho titles, condensed all-caps interface labels,
+   cut-corner tags, hazard stripes, scanlines and a HUD. Loaded after deck.css and scenes.css. */
+@font-face { font-family: "EVA Mincho"; src: url("../vendor/fonts/eva-mincho-800.woff2") format("woff2"); font-weight: 800; font-display: block; }
+@font-face { font-family: "Barlow Condensed"; src: url("../vendor/fonts/barlow-condensed-latin-500-normal.woff2") format("woff2"); font-weight: 500; font-display: block; }
+@font-face { font-family: "Barlow Condensed"; src: url("../vendor/fonts/barlow-condensed-latin-600-normal.woff2") format("woff2"); font-weight: 600; font-display: block; }
+@font-face { font-family: "Barlow Condensed"; src: url("../vendor/fonts/barlow-condensed-latin-700-normal.woff2") format("woff2"); font-weight: 700; font-display: block; }
+
+:root {
+  --serif: "EVA Mincho", "Hiragino Mincho ProN", "Yu Mincho", Georgia, serif;
+  --cond: "Barlow Condensed", "Helvetica Neue", "Arial Narrow", sans-serif;
+  --stripes: repeating-linear-gradient(-45deg, var(--bio) 0 18px, transparent 18px 36px);
+  --stripes-red: repeating-linear-gradient(-45deg, var(--bad) 0 18px, transparent 18px 36px);
+}
+
+/* ---------- background: faint grid, vignette, scanlines ---------- */
+#bg {
+  background:
+    radial-gradient(ellipse at 50% 45%, transparent 55%, rgba(0, 0, 0, .75) 100%),
+    repeating-linear-gradient(0deg, rgba(255, 138, 28, .045) 0 1px, transparent 1px 60px),
+    repeating-linear-gradient(90deg, rgba(255, 138, 28, .045) 0 1px, transparent 1px 60px),
+    #050302;
+}
+#stage::after {
+  content: ""; position: absolute; inset: 0; pointer-events: none; z-index: 20;
+  background: repeating-linear-gradient(0deg, rgba(0, 0, 0, .22) 0 1px, transparent 1px 3px);
+}
+
+/* ---------- captions ---------- */
+#caption .kicker {
+  display: inline-block; font: 700 25px/1 var(--cond); letter-spacing: .2em; color: #050302; background: var(--bio);
+  padding: 7px 34px 5px 14px; clip-path: polygon(0 0, 100% 0, calc(100% - 20px) 100%, 0 100%); min-height: 0;
+}
+#caption .headline {
+  font: 800 84px/1.02 var(--serif); letter-spacing: -.01em; color: #fff; font-variation-settings: normal;
+  text-shadow: 0 0 22px rgba(255, 138, 28, .28); margin-top: 20px;
+}
+/* the squeezed Evangelion title look: compress the type horizontally */
+#caption .hx { display: inline-block; transform: scaleX(.84); transform-origin: left center; width: calc(100% / .84); }
+#caption.center .hx { transform-origin: center center; margin-left: calc((100% - 100% / .84) / 2); }
+#caption .sub { color: var(--dim); }
+#caption em { font-style: normal; color: var(--gold); }
+#caption.compact .headline { font-size: 56px; margin-top: 14px; }
+#caption.compact { top: 40px; }
+
+/* part 3 complaints: warning banner */
+#caption.quote .kicker { background: var(--bad); color: #050302; }
+#caption.quote .headline { font-style: normal; font-size: 74px; }
+#caption.quote .headline::before, #caption.quote .headline::after { color: var(--bad); }
+#caption.quote.big .headline { font-size: 116px; }
+#caption.quote.big::before, #caption.quote.big::after {
+  content: ""; display: block; height: 26px; width: 1700px; background: var(--stripes-red); opacity: .85;
+}
+#caption.quote.big::before { margin-bottom: 34px; }
+#caption.quote.big::after { margin-top: 40px; }
+
+/* title and close: emergency-card look */
+#caption.center .kicker { background: var(--bio); }
+#caption.center .headline { font-size: 136px; }
+#caption.center .sub { color: #ffd9b0; }
+
+/* ---------- chrome ---------- */
+#part-label {
+  font: 600 22px/1 var(--cond); letter-spacing: .18em; color: var(--bio); bottom: 22px;
+  border: 2px solid var(--bio); padding: 6px 14px 4px 46px; background: rgba(5, 3, 2, .7);
+}
+#part-label::before { content: ""; position: absolute; left: 0; top: 0; bottom: 0; width: 32px; background: var(--stripes); }
+#part-label:empty { display: none; }
+#counter { font: 700 26px/1 var(--cond); letter-spacing: .12em; color: var(--bio); bottom: 22px; }
+#counter::before { content: "SEQ "; color: var(--faint); font-weight: 600; }
+#progress { height: 10px; background: repeating-linear-gradient(90deg, rgba(255, 138, 28, .16) 0 16px, transparent 16px 20px); }
+#progress i { background: repeating-linear-gradient(90deg, var(--ai) 0 16px, transparent 16px 20px); box-shadow: 0 0 12px rgba(61, 255, 162, .5); }
+
+/* ---------- HUD ---------- */
+#hud { position: absolute; inset: 0; pointer-events: none; z-index: 4; }
+.hud-corner { position: absolute; width: 44px; height: 44px; border: 0 solid var(--bio); opacity: .9; }
+.hud-corner.tl { left: 18px; top: 18px; border-left-width: 4px; border-top-width: 4px; }
+.hud-corner.tr { right: 18px; top: 18px; border-right-width: 4px; border-top-width: 4px; }
+.hud-corner.bl { left: 18px; bottom: 18px; border-left-width: 4px; border-bottom-width: 4px; }
+.hud-corner.br { right: 18px; bottom: 18px; border-right-width: 4px; border-bottom-width: 4px; }
+.hud-tr { position: absolute; right: 74px; top: 22px; text-align: right; color: var(--bio); }
+.hud-jp { font: 800 26px/1 var(--serif); letter-spacing: .08em; color: var(--bio); }
+.hud-en { font: 600 15px/1 var(--cond); letter-spacing: .22em; margin-top: 6px; color: var(--faint); }
+.hud-time { display: inline-flex; align-items: baseline; gap: 8px; margin-top: 8px; border: 2px solid var(--bio); padding: 4px 10px 2px; background: rgba(5, 3, 2, .7); }
+.hud-time span { font: 600 13px/1 var(--cond); letter-spacing: .14em; color: var(--faint); }
+.hud-time b { font: 700 26px/1 var(--cond); letter-spacing: .06em; color: var(--bio); font-variant-numeric: tabular-nums; min-width: 6ch; }
+.hud-time em { font: 600 15px/1 var(--cond); font-style: normal; color: var(--faint); }
+
+/* ---------- interface type in the scenes ---------- */
+.scene .note, .because, .t-small, .t-label, .tokhead, .presets button, .tokstats, .pipe .stage i,
+.chatcard h4, #notes .meta, #overview h3 { font-family: var(--cond) !important; letter-spacing: .12em; }
+.scene .note { font-size: 21px; text-transform: uppercase; }
+.t-small { font-size: 21px; }
+.because { font-weight: 700; color: var(--bad); }
+
+/* ---------- shapes: hard edges instead of rounded ones (circles stay circles) ---------- */
+#stage div:not([style*="50%"]):not(.hud-corner), #stage button, #stage input, #stage a, #stage .tokchip,
+.pipe .stage, .chatcard, .bubble, .fix, .phrase, .codecard, .chip, .seg, .winframe { border-radius: 2px !important; }
+.pipe .stage.on, .fix, .chip { clip-path: polygon(0 0, calc(100% - 14px) 0, 100% 14px, 100% 100%, 0 100%); }
+.pipe .stage i { border-radius: 0 !important; }
+.winframe { border-color: var(--bio); box-shadow: 0 0 0 1px rgba(255, 138, 28, .3), inset 0 0 30px rgba(255, 138, 28, .08); }
+.winframe::before { font-family: var(--cond); letter-spacing: .2em; color: var(--bio); }
+.winframe::after { font-family: var(--cond); letter-spacing: .1em; }
+
+/* notes/overview/presenter pick up the theme too */
+#overview h2, #presenter h1 { font-family: var(--serif); }
+
+/* quote marks belong to the squeezed headline span, not to separate lines */
+#caption.quote .headline::before, #caption.quote .headline::after { content: none; }
+#caption.quote .hx::before { content: "“"; color: var(--bad); }
+#caption.quote .hx::after { content: "”"; color: var(--bad); }
+#caption.quote:not(.big) .headline { font-size: 64px; }
+
+/* HUD text a touch larger for projectors */
+.hud-time span { font-size: 15px; }
+.hud-en { font-size: 16px; }
+
+/* quote marks belong to the squeezed headline span, not to separate lines */
+#caption.quote .headline::before, #caption.quote .headline::after { content: none; }
+#caption.quote .hx::before { content: "“"; color: var(--bad); }
+#caption.quote .hx::after { content: "”"; color: var(--bad); }
+#caption.quote:not(.big) .headline { font-size: 64px; }
+
+/* HUD text a touch larger for projectors */
+.hud-time span { font-size: 15px; }
+.hud-en { font-size: 16px; }
+
+/* title / close backdrop */
+.eva-band { position: absolute; left: 0; right: 0; height: 34px; background: var(--stripes); background-size: 51px 51px; opacity: .9; animation: eva-band 3s linear infinite; }
+.eva-band::before, .eva-band::after { content: ""; position: absolute; left: 0; right: 0; height: 3px; background: var(--bio); }
+.eva-band::before { top: -10px; } .eva-band::after { bottom: -10px; }
+@keyframes eva-band { to { background-position: 102px 0; } }
+.eva-close .eva-band { background-image: repeating-linear-gradient(-45deg, var(--ai) 0 18px, transparent 18px 36px); }
+.eva-close .eva-band::before, .eva-close .eva-band::after { background: var(--ai); }
+.eva-jp { position: absolute; left: 0; right: 0; top: 222px; text-align: center; font: 800 46px/1 var(--serif); letter-spacing: .5em; text-indent: .5em; color: var(--bio); text-shadow: 0 0 18px rgba(255, 138, 28, .45); }
+.eva-close .eva-jp { color: var(--ai); text-shadow: 0 0 18px rgba(61, 255, 162, .45); }

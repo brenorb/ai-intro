@@ -3,6 +3,7 @@
 // A scene module exports create(root, api) -> { update(ctx), exit() }.
 import { gsap, h } from './lib.js';
 import { SLIDES as ALL_SLIDES, SCENES, PARTS } from './slides.js';
+import { createHud } from './hud.js';
 
 const params = new URLSearchParams(location.search);
 const skipIds = new Set((params.get('skip') || '').split(',').filter(Boolean));
@@ -45,7 +46,7 @@ function setCaption(slide, step, instant) {
   const apply = () => {
     captionEl.className = layout;
     kickerEl.innerHTML = c.kicker || '';
-    headEl.innerHTML = c.h || '';
+    headEl.innerHTML = c.h ? `<span class="hx">${c.h}</span>` : '';
     subEl.innerHTML = c.sub || '';
     kickerEl.style.display = c.kicker ? '' : 'none';
     subEl.style.display = c.sub ? '' : 'none';
@@ -138,6 +139,7 @@ function show(idx, step, { dir = 1, instant = false } = {}) {
 
   // chrome
   $('#part-label').textContent = PARTS[slide.part] || '';
+  hud && hud.update(slide);
   $('#counter').textContent = `${idx + 1} / ${SLIDES.length}`;
   const total = SLIDES.reduce((a, sl) => a + (sl.steps || 1), 0);
   const done = SLIDES.slice(0, idx).reduce((a, sl) => a + (sl.steps || 1), 0) + step + 1;
@@ -222,8 +224,10 @@ function bootPresenter() {
 }
 
 // ---------- boot ----------
+let hud = null;
 function boot() {
   if (isPresenter) return bootPresenter();
+  hud = createHud(stage);
   fit();
   addEventListener('keydown', onKey);
   // scroll / trackpad: optional and secondary; ignored on interactive slides and while a widget has focus

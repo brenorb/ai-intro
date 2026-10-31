@@ -124,3 +124,7 @@
 .eva-close .eva-band::before, .eva-close .eva-band::after { background: var(--ai); }
 .eva-jp { position: absolute; left: 0; right: 0; top: 222px; text-align: center; font: 800 46px/1 var(--serif); letter-spacing: .5em; text-indent: .5em; color: var(--bio); text-shadow: 0 0 18px rgba(255, 138, 28, .45); }
 .eva-close .eva-jp { color: var(--ai); text-shadow: 0 0 18px rgba(61, 255, 162, .45); }
+
+/* the live Transformer Explainer embed sits above the scanlines (they made it look filmed off a TV)
+   and a bit lower, clear of the taller themed headline */
+.scene[data-scene="explainer"] > div:first-of-type { z-index: 21; top: 200px !important; height: 800px !important; }

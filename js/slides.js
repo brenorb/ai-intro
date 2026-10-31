@@ -217,7 +217,7 @@ CLICK — the harness loads it at the start of every session: Monday, Wednesday,
   {
     id: 'skills', scene: 'context', state: 'skills', steps: 2, part: 2, title: 'Skills', time: 1.0,
     captions: [
-      { kicker: 'Context that survives the session', h: 'Skills: knowledge loaded only when needed', sub: 'A skill is a folder of instructions, examples and scripts. Only its one-line description sits in the window.' },
+      { kicker: 'Context that survives the session', h: 'Skills: on-demand knowledge', sub: 'A skill is a folder of instructions, examples and scripts, loaded only when needed. Until then, only its one-line description sits in the window.' },
       { h: 'The right knowledge, at the right moment', sub: 'When the task matches, the whole skill is pulled in. This is how your conventions beat the training data.' },
     ],
     notes: `Second tool. A skill is a folder: a SKILL.md with a name, a one-line description and full instructions, plus examples, docs and scripts.

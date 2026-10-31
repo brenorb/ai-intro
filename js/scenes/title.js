@@ -1,5 +1,5 @@
-// Scene "title": an emergency-card backdrop for the title and the closing slide: hazard-stripe bands,
-// a Japanese label and slowly counter-rotating MAGI-style rings (orange on the title, green at the close).
+// Scene "title": an emergency-card backdrop for the title and the closing slide: hazard-stripe bands
+// and slowly counter-rotating MAGI-style rings (orange on the title, green at the close).
 import { gsap, h, rng, mover, W, H } from '../lib.js';
 
 export default function create(root) {
@@ -13,7 +13,6 @@ export default function create(root) {
   }));
   const bandTop = h('div', { class: 'eva-band', style: 'top:150px' }, root);
   const bandBot = h('div', { class: 'eva-band', style: 'top:900px' }, root);
-  const jp = h('div', { class: 'eva-jp', text: '人工知能入門' }, root);
   let on = false, warm = 0;
   function tick() {
     if (!on) return;
@@ -61,7 +60,6 @@ export default function create(root) {
       on = true;
       const close = state === 'close';
       root.classList.toggle('eva-close', close);
-      jp.textContent = close ? '作戦終了' : '人工知能入門';
       gsap.to(tone, { v: state === 'close' ? 1 : 0, duration: instant ? 0 : 1.2, onUpdate: () => { warm = tone.v; } });
       mover(instant)(cta, { autoAlpha: state === 'close' ? 1 : 0, y: state === 'close' ? 0 : 16, duration: 0.7, delay: state === 'close' && !instant ? 0.9 : 0 });
     },

@@ -78,9 +78,8 @@
 .hud-corner.bl { left: 18px; bottom: 18px; border-left-width: 4px; border-bottom-width: 4px; }
 .hud-corner.br { right: 18px; bottom: 18px; border-right-width: 4px; border-bottom-width: 4px; }
 .hud-tr { position: absolute; right: 74px; top: 22px; text-align: right; color: var(--bio); }
-.hud-jp { font: 800 26px/1 var(--serif); letter-spacing: .08em; color: var(--bio); }
-.hud-en { font: 600 15px/1 var(--cond); letter-spacing: .22em; margin-top: 6px; color: var(--faint); }
-.hud-time { display: inline-flex; align-items: baseline; gap: 8px; margin-top: 8px; border: 2px solid var(--bio); padding: 4px 10px 2px; background: rgba(5, 3, 2, .7); }
+.hud-en { font: 700 22px/1 var(--cond); letter-spacing: .22em; color: var(--bio); margin-top: 10px; }
+.hud-time { display: inline-flex; align-items: baseline; gap: 8px; margin-top: 0; border: 2px solid var(--bio); padding: 4px 10px 2px; background: rgba(5, 3, 2, .7); }
 .hud-time span { font: 600 13px/1 var(--cond); letter-spacing: .14em; color: var(--faint); }
 .hud-time b { font: 700 26px/1 var(--cond); letter-spacing: .06em; color: var(--bio); font-variant-numeric: tabular-nums; min-width: 6ch; }
 .hud-time em { font: 600 15px/1 var(--cond); font-style: normal; color: var(--faint); }
@@ -113,7 +112,6 @@
 
 /* HUD text a touch larger for projectors */
 .hud-time span { font-size: 15px; }
-.hud-en { font-size: 16px; }
 
 /* title / close backdrop */
 .eva-band { position: absolute; left: 0; right: 0; height: 34px; background: var(--stripes); background-size: 51px 51px; opacity: .9; animation: eva-band 3s linear infinite; }
@@ -122,9 +120,7 @@
 @keyframes eva-band { to { background-position: 102px 0; } }
 .eva-close .eva-band { background-image: repeating-linear-gradient(-45deg, var(--ai) 0 18px, transparent 18px 36px); }
 .eva-close .eva-band::before, .eva-close .eva-band::after { background: var(--ai); }
-.eva-jp { position: absolute; left: 0; right: 0; top: 222px; text-align: center; font: 800 46px/1 var(--serif); letter-spacing: .5em; text-indent: .5em; color: var(--bio); text-shadow: 0 0 18px rgba(255, 138, 28, .45); }
-.eva-close .eva-jp { color: var(--ai); text-shadow: 0 0 18px rgba(61, 255, 162, .45); }
-
+.eva-close 
 /* the live Transformer Explainer embed sits above the scanlines (they made it look filmed off a TV)
    and a bit lower, clear of the taller themed headline */
 .scene[data-scene="explainer"] > div:first-of-type { z-index: 21; top: 200px !important; height: 800px !important; }

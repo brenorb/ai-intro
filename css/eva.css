@@ -135,3 +135,7 @@
 #caption .headline { font-size: 74px; max-width: 1700px; margin-top: 10px; }
 #caption.compact .headline { font-size: 52px; margin-top: 8px; }
 #caption.quote .headline { max-width: 1700px; }
+
+/* closing CTA: diagonal stripes right under a horizontal edge make the box look tilted, so give it room */
+.scene[data-scene="title"] > a { top: 770px !important; }
+.scene[data-scene="title"] .eva-band:nth-of-type(2) { top: 940px !important; }

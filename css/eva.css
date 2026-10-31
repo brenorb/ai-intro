@@ -95,7 +95,8 @@
 /* ---------- shapes: hard edges instead of rounded ones (circles stay circles) ---------- */
 #stage div:not([style*="50%"]):not(.hud-corner), #stage button, #stage input, #stage a, #stage .tokchip,
 .pipe .stage, .chatcard, .bubble, .fix, .phrase, .codecard, .chip, .seg, .winframe { border-radius: 2px !important; }
-.pipe .stage.on, .fix, .chip { clip-path: polygon(0 0, calc(100% - 14px) 0, 100% 14px, 100% 100%, 0 100%); }
+/* cut corner only where nothing sits outside the box (it clips overflow such as the step number tags) */
+.fix, .chip { clip-path: polygon(0 0, calc(100% - 14px) 0, 100% 14px, 100% 100%, 0 100%); }
 .pipe .stage i { border-radius: 0 !important; }
 .winframe { border-color: var(--bio); box-shadow: 0 0 0 1px rgba(255, 138, 28, .3), inset 0 0 30px rgba(255, 138, 28, .08); }
 .winframe::before { font-family: var(--cond); letter-spacing: .2em; color: var(--bio); }

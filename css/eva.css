@@ -78,7 +78,6 @@
 .hud-corner.bl { left: 18px; bottom: 18px; border-left-width: 4px; border-bottom-width: 4px; }
 .hud-corner.br { right: 18px; bottom: 18px; border-right-width: 4px; border-bottom-width: 4px; }
 .hud-tr { position: absolute; right: 74px; top: 22px; text-align: right; color: var(--bio); }
-.hud-en { font: 700 22px/1 var(--cond); letter-spacing: .22em; color: var(--bio); margin-top: 10px; }
 .hud-time { display: inline-flex; align-items: baseline; gap: 8px; margin-top: 0; border: 2px solid var(--bio); padding: 4px 10px 2px; background: rgba(5, 3, 2, .7); }
 .hud-time span { font: 600 13px/1 var(--cond); letter-spacing: .14em; color: var(--faint); }
 .hud-time b { font: 700 26px/1 var(--cond); letter-spacing: .06em; color: var(--bio); font-variant-numeric: tabular-nums; min-width: 6ch; }
